@@ -1,0 +1,59 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@200;300;400;500;700&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.vs-input{
+	width:100% !important;
+}
+
+.card{
+	border-radius:1em !important;
+	border: 0px solid rgba(0, 0, 0, 0);
+}
+.modal-content{
+	border-radius:1em !important;
+	border: 0px solid rgba(0, 0, 0, 0);
+}
+
+.btn-dark {
+    color: #ffffff;
+    background-color: #183B56;
+    border-color: #183B56;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(23, 31, 56, 0.075);
+}
+.btn-dark:hover {
+    color: #ffffff;
+    background-color: #102638;
+    border-color: #0d202e;
+}
+
+.btn-soft {
+    color: #183B56;
+    background-color: #eff1f5;
+    border-color: #eff1f5;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(23, 31, 56, 0.075);
+}
+
+.btn-soft:hover {
+    color: #183B56;
+    background-color: #d7dce6;
+    border-color: #d0d6e1;
+}
+
+
+.container {
+    width: 50x;
+    height: 50px;
+}
+
+/* Resize images */
+.container img {
+    width: 100%;
+    height: auto;
+}
