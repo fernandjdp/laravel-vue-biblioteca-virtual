@@ -12,6 +12,30 @@ window.Vue = require('vue').default;
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
+import router from './routes'
+
+/* Store del vuex */
+
+const store = new Vuex.Store({
+  state: {
+
+  },
+  mutations: {
+
+  },
+  actions: {
+
+  },
+  getters: {
+
+  }
+})
+
+import { sync } from 'vuex-router-sync'
+
+sync(store, router);
+
+
 
 /* Vue Atlas (Estilo Atlassian) */
 
@@ -81,7 +105,6 @@ Vue.mixin({
 	           case 'get-paginado':
 	            axios.get(ruta).then(response => {
 	            	//Variable2 suele ser "total", pero lo pondré opcional por si acaso
-	            	console.log(response.data)
 	              this[variable] = response.data[0].data;
 	              this[variable2] = response.data[1];	
 	            });
@@ -120,8 +143,6 @@ Vue.mixin({
 	    },
   	}
 });
-
-import router from './routes'
 
 /* FontAwesome*/
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
@@ -183,4 +204,5 @@ const app = new Vue({
     	}
     },
     router,
+    store,
 });

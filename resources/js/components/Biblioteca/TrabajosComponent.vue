@@ -59,13 +59,6 @@
 	{
 		name: 'trabajos_especiales',
 
-		props: {
-			carrera_id: {
-				type: Number,
-				required: false
-			},
-		},
-
 		computed: {
 			trabajosAprobados :function () {
 				return this.trabajos_carrera.filter(function (trabajo) {
@@ -73,6 +66,12 @@
 				})
 			}
 		},
+
+	    watch:{
+	      $route(){
+	        this.getTrabajos()
+	      }
+	    },
 
 		data:() => ({
 	      trabajo: null,
@@ -91,7 +90,7 @@
 	      		$('#detallesTrabajo').modal('show');
 	      	},	
 	      	getTrabajos(){
-	      		this.llamarAPI({tipo:'get', ruta:'api/trabajo_by_carrera/'+this.carrera_id, variable:'trabajos_carrera'})
+	      		this.llamarAPI({tipo:'get', ruta:'api/trabajo_by_carrera/'+this.$store.state.route.params.carrera_id, variable:'trabajos_carrera'})
 	      	},
 	      	updateTrabajo(){
 	        	this.llamarAPI({tipo:'put', ruta:'api/trabajo/', id:this.form.id})

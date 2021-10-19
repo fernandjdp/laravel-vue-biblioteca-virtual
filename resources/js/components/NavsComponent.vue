@@ -62,7 +62,18 @@
               Biblioteca
             </vs-sidebar-item>
           </template>
-          <vs-sidebar-item to="/derecho" id="derecho">
+          <!-- PRUEBA -->
+          <div v-for="(carrera, index) in carreras">
+            <vs-sidebar-item :to="'/biblioteca/'+carrera.id" :id="carrera.nombre">
+              <template #icon>
+                <font-awesome-icon icon="landmark" />
+              </template>
+              {{carrera.nombre}}
+            </vs-sidebar-item>
+          </div>
+          <!-- PRUEBA -->
+
+          <!--<vs-sidebar-item to="/derecho" id="derecho">
             <template #icon>
               <font-awesome-icon icon="landmark" />
             </template>
@@ -91,7 +102,7 @@
               <font-awesome-icon icon="map-marked-alt" />
             </template>
             Turismo
-          </vs-sidebar-item>
+          </vs-sidebar-item>-->
         </vs-sidebar-group>
         <vs-sidebar-group v-show="this.$userType >= 2">
           <template #header>
@@ -102,12 +113,12 @@
               Administracion
             </vs-sidebar-item>
           </template>
-          <!--<vs-sidebar-item to="/carreras" id="carreras">
+          <vs-sidebar-item to="/carreras" id="carreras">
             <template #icon>
               <font-awesome-icon icon="book-open" />
             </template>
             Carreras
-          </vs-sidebar-item>-->
+          </vs-sidebar-item>
           <vs-sidebar-item to="/usuarios" id="usuarios">
             <template #icon>
               <font-awesome-icon icon="users" />
@@ -176,19 +187,19 @@
 <script>
   export default {
     name: 'NavLateral',
+
     data:() => ({
       active: 'home',
       carreras: [],
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       activeSidebar: false  
     }),
+
     mounted(){
       this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
-      console.log(this.$userType)
     },
-     methods: {
-      enviarParametros(){
-      },
+
+    methods: {
       submit : function(){
       this.$refs.form.submit();
       }

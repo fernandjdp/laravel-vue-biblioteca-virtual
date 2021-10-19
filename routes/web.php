@@ -26,4 +26,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('{path}',[App\Http\Controllers\HomeController::class, 'index'])->where('path','([-a-z0-9_\s]+)');
 
-Route::get('/{catchall?}', [App\Http\Controllers\HomeController::class, 'index'])->where('catchall', '^(?!api).*$')->name('biblioteca');
+//Route::get('/{catchall?}', [App\Http\Controllers\HomeController::class, 'index'])->where('catchall', '^(?!api).*$')->name('biblioteca');

@@ -1,38 +1,31 @@
 <template>
   <div class="container-fluid">
-    <vs-row justify="center">
-      <estadisticas :carrera="carrera"></estadisticas>
-    </vs-row>
+
+    <info></info>
+
+    <div class="row justify-content-center px-5 mx-1">
+      <filtro-busqueda :carrera_id="$store.state.route.params.carrera_id"></filtro-busqueda>
+      <boton-nuevo-trabajo></boton-nuevo-trabajo>   
+    </div>
     
-    <trabajos :carrera="carrera"></trabajos>
-  
+    <trabajos-especiales :carrera_id="$store.state.route.params.carrera_id"></trabajos-especiales>
+
+
   </div>
 </template>
 
 <script>
    export default {
-    name: 'Biblioteca',
-    props: {
-      carrera: {
-        type: Object,
-        required: false
-      },
-    },
-    watch: {
-      '$route':'reload'
-    },
+    name: 'bibliotecaDerecho',
+
     created(){
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
       });
     },
     mounted(){
+
     },
-    data:() => ({
-      active: false, 
-      estadisticas:[],
-      trabajos_especiales:[],
-    }),
     methods:{
       reload(){
         Fire.$emit('recargar');

@@ -16,6 +16,10 @@ export default new VueRouter({
 	    { path: '/revision', component: require('./views/Administracion/Revision.vue').default },
 	    //{ path: '/perfil', component: require('./views/Perfil.vue').default },
 
+	    /* PRUEBA */
+	    { path: '/biblioteca/:carrera_id', component: require('./views/Biblioteca/Biblioteca.vue').default },
+	    /* PRUEBA */
+
 	    //Ruta de las vistas de las carreras
 	    { path: '/derecho', component: require('./views/Biblioteca/Derecho.vue').default },
 	    { path: '/ingenieria-electronica', component: require('./views/Biblioteca/Electronica.vue').default },    

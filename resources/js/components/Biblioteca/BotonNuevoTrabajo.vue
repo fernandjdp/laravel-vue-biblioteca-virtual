@@ -24,12 +24,6 @@
 		      padding: 10
 		    }
 		},
-		props: {
-      carrera_id: {
-        type: Number,
-        required: false
-      },
-    },
 
 		methods: {
       cardClick(index){
