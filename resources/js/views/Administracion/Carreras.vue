@@ -105,13 +105,14 @@
               </vs-col>
               <vs-col w="12">
                 <div class="center pt-5 content-inputs">
-                <vs-input
-                    @change="preIcono()"
-                    type="text"
-                    v-model="pre_icono"
-                    label="Icono"
-                    placeholder="Ej: landmark"
-                  />
+                  <va-select
+                    v-model="form.icono"
+                    placeholder="Select an option"  
+                    :search="true"
+                    menu-max-height="100"
+                    :input-placeholder="'Icono'"
+                    :options="ARRAY_ICONOS">
+                  </va-select>
                 </div>
               </vs-col>
               <vs-col w="4">
@@ -119,7 +120,7 @@
                   <div class="card" style="height: 100px; border-radius:1em !important;">
                     <div class="card-body shadow" style="background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;">
                       <vs-row align="center" justify="center">             
-                        <font-awesome-icon :icon="form.icono" size="4x"  fixed-width></font-awesome-icon>
+                        <font-awesome-icon v-if="form.icono" :icon="form.icono" size="4x"  fixed-width></font-awesome-icon>
                       </vs-row>
                     </div>
                   </div>
@@ -141,6 +142,7 @@
 </template>
 
 <script>
+  const ARRAY_ICONOS = require('../Extras/array_iconos.json')
   export default 
   {
     data:() => ({
@@ -158,6 +160,7 @@
       this.getCarrera();
     },
     created() {
+      this.ARRAY_ICONOS = ARRAY_ICONOS;
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
           this.getCarrera();
