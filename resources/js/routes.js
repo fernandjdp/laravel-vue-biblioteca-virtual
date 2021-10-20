@@ -17,7 +17,7 @@ export default new VueRouter({
 	    //{ path: '/perfil', component: require('./views/Perfil.vue').default },
 
 	    /* PRUEBA */
-	    { path: '/biblioteca/:carrera_id', component: require('./views/Biblioteca/Biblioteca.vue').default },
+	    { path: '/biblioteca-:carrera_id', component: require('./views/Biblioteca/Biblioteca.vue').default },
 	    /* PRUEBA */
 
 	    //Ruta de las vistas de las carreras

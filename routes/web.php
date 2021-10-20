@@ -23,7 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /* Con esta ruta, no importa en qué componente/vista de vue estés, cuando recargues o ingreses la ruta a ese componente, entrará allí*/
 
-
 Route::get('{path}',[App\Http\Controllers\HomeController::class, 'index'])->where('path','([-a-z0-9_\s]+)');
 
-//Route::get('/{catchall?}', [App\Http\Controllers\HomeController::class, 'index'])->where('catchall', '^(?!api).*$')->name('biblioteca');

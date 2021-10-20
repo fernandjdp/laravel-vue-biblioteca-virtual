@@ -90,7 +90,8 @@
 	      		$('#detallesTrabajo').modal('show');
 	      	},	
 	      	getTrabajos(){
-	      		this.llamarAPI({tipo:'get', ruta:'api/trabajo_by_carrera/'+this.$store.state.route.params.carrera_id, variable:'trabajos_carrera'})
+	      		//this.llamarAPI({tipo:'get', ruta:'api/trabajo_by_carrera/'+this.$store.state.route.params.carrera_id, variable:'trabajos_carrera'})
+	      		axios.get('api/trabajo_by_carrera/'+this.$store.state.route.params.carrera_id).then(({ data }) => (this.trabajos_carrera = data));
 	      	},
 	      	updateTrabajo(){
 	        	this.llamarAPI({tipo:'put', ruta:'api/trabajo/', id:this.form.id})

@@ -64,9 +64,9 @@
           </template>
           <!-- PRUEBA -->
           <div v-for="(carrera, index) in carreras">
-            <vs-sidebar-item :to="'/biblioteca/'+carrera.id" :id="carrera.nombre">
+            <vs-sidebar-item :to="'/biblioteca-'+carrera.id" :id="carrera.nombre">
               <template #icon>
-                <font-awesome-icon icon="landmark" />
+                <font-awesome-icon :icon="carrera.icono" />
               </template>
               {{carrera.nombre}}
             </vs-sidebar-item>
