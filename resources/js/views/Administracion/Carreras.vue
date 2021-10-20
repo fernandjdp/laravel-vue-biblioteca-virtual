@@ -54,8 +54,8 @@
                             <vs-td>
                             {{ tr.nombre }}
                             </vs-td>
-                            <vs-td>
-                            {{ tr.icono }}
+                            <vs-td v-if="tr.icono">                              
+                                <font-awesome-icon :icon="tr.icono" size="2x"  fixed-width></font-awesome-icon>                            
                             </vs-td>
                             <template #expand>
                               <div class="con-content">       
@@ -129,7 +129,7 @@
               <template #footer>
                 <div class="footer-dialog">
                   <vs-button @click="edicion ? updateCarrera() : createCarrera()" color="rgb(22,212,149)" block>
-                    Crear
+                    <h4 class="text-white" v-show="!edicion">Crear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
                   </vs-button>
                 </div>
               </template>

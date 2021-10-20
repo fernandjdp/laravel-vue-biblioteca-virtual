@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Trabajo;
+use App\Models\User;
 use App\Models\autoresTrabajo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

@@ -14,10 +14,10 @@ class UdefaCarrerasSeeder extends Seeder
      */
     public function run()
     {
-        Carrera::create(array( 'id' => 0, 'nombre' => 'Derecho' ));
-        Carrera::create(array( 'id' => 1, 'nombre' => 'Ingeniería Ambiental' ));
-        Carrera::create(array( 'id' => 2, 'nombre' => 'Ingeniería Electrónica' ));
-        Carrera::create(array( 'id' => 3, 'nombre' => 'Procesos Gerenciales' ));
-        Carrera::create(array( 'id' => 4, 'nombre' => 'Turismo' ));
+        Carrera::create(array( 'id' => 0, 'nombre' => 'Derecho', 'icono' => 'landmark' ));
+        Carrera::create(array( 'id' => 1, 'nombre' => 'Ingeniería Ambiental', 'icono' => 'tree' ));
+        Carrera::create(array( 'id' => 2, 'nombre' => 'Ingeniería Electrónica', 'icono' => 'server' ));
+        Carrera::create(array( 'id' => 3, 'nombre' => 'Procesos Gerenciales', 'icono' => 'dollar-sign' ));
+        Carrera::create(array( 'id' => 4, 'nombre' => 'Turismo', 'icono' => 'store' ));
     }
 }

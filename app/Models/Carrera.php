@@ -10,7 +10,7 @@ class Carrera extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
+        'nombre', 'icono',
     ];
 
     public function lineas(){
