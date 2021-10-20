@@ -151,7 +151,7 @@
       form: new Form({
         id:'',
         nombre:'',
-        icono:'icons',
+        icono:'',
       }),
     }),
     mounted() {

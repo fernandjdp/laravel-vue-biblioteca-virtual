@@ -46,6 +46,7 @@ class CarreraController extends Controller
 
         return Carrera::create([
             'nombre' => $request['nombre'],
+            'icono' => $request['icono'],
         ]);
     }
 
