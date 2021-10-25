@@ -94,26 +94,26 @@
             </template>
             <vs-row justify="center">
               <vs-col w="12">
-                <div class="center pt-5 content-inputs">
-                  <vs-input
-                    type="text"
-                    v-model="form.nombre"
-                    label="Nombre"
-                    placeholder="Ej: Ingeniería Electrónica"
-                  />
-                </div>            
-              </vs-col>
-              <vs-col w="12">
-                <div class="center pt-5 content-inputs">
+                <va-form ref="form" type="vertical">
+                  <va-form-item label="Nombre" need>
+                    <va-input
+                      name="Nombre"
+                      v-model="form.nombre"
+                      placeholder="Ej: Ingenieria"
+                      :rules="[{type:'required', tip:'Este campo es necesario'}]"
+                      clearable />
+                  </va-form-item>
+                <va-form-item label="Icono" need>
                   <va-select
                     v-model="form.icono"
-                    placeholder="Select an option"  
+                    placeholder="Selecciona un icono"  
                     :search="true"
                     menu-max-height="100"
                     :input-placeholder="'Icono'"
                     :options="ARRAY_ICONOS">
                   </va-select>
-                </div>
+                </va-form-item>
+                </va-form>
               </vs-col>
               <vs-col w="4">
                 <div class="center pt-4 content-inputs">
