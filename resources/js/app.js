@@ -104,10 +104,13 @@ Vue.mixin({
 	    llamarAPI: function({tipo, ruta, variable='',variable2='', info='form', id=''}={}) {
 	    	//Funcion para simplificar el uso del axios
 	        switch(tipo) {
+
+	        /* Obtener informacion*/
 	          case 'get':
 	            axios.get(ruta).then(({ data }) => (this[variable] = data));
 	            break;
 
+	        /* Obtener informacion Paginada*/
 	           case 'get-paginado':
 	            axios.get(ruta).then(response => {
 	            	//Variable2 suele ser "total", pero lo pondré opcional por si acaso
@@ -116,6 +119,7 @@ Vue.mixin({
 	            });
 	            break;
 
+	        /* Crear nueva información */
 	          case 'post':
 	            this[info].post(ruta)
 	            .then(()=>{
@@ -135,6 +139,7 @@ Vue.mixin({
 	            })
 	          break;
 
+	        /* Editar/Actualizar información */
 	          case 'put':
 	            this[info].put(ruta+id)
 	            .then(()=>{
@@ -154,6 +159,7 @@ Vue.mixin({
 	            });
 	          break;
 
+	        /* Eliminar información */
 	          case 'delete':
 	          // Inicia el swal para mostrar la alerta
 	          this.$swal({
