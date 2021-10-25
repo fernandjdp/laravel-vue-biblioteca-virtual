@@ -83,7 +83,7 @@
               </vs-col>
             </vs-row>
         </div>
-          <vs-dialog v-model="active">
+          <vs-dialog v-model="active" v-on:close="">
             <template #header>
               <h4 v-if="edicion"class="not-margin">
                 Edita/actualiza la <b>Carrera</b>
@@ -142,14 +142,13 @@
 </template>
 
 <script>
-  const ARRAY_ICONOS = require('../Extras/array_iconos.json')
+  const ARRAY_ICONOS = Object.freeze(require('../Extras/array_iconos.json'))
   export default 
   {
     data:() => ({
       active: false, 
       edicion:false,
       carreras: [],
-      pre_icono:'',
       form: new Form({
         id:'',
         nombre:'',
@@ -158,23 +157,15 @@
     }),
     mounted() {
       this.getCarrera();
+      this.ARRAY_ICONOS = ARRAY_ICONOS;
     },
     created() {
-      this.ARRAY_ICONOS = ARRAY_ICONOS;
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
           this.getCarrera();
       });
     },
-    methods: {
-
-      preIcono() {
-        const loading = this.$vs.loading()
-        setTimeout(() => {
-          loading.close()
-          this.form.icono = this.pre_icono
-        }, 300)
-      },
+    methods: { 
 
       modalCrear(){
         this.edicion = false
@@ -185,6 +176,10 @@
         this.edicion = true
         this.active = !this.active
         this.form.fill(info)
+      },
+
+      reiniciarInfo(){
+        this.form.reset()
       },
 
       /* Un CRUD (Create, Read, Update, Delete) permite, como su nombre en inglés lo indica, crear, leer, actualizar y eliminar información, por lo tanto uso los mismos nombres en inglés para las funciones de tal forma que se mantenga la idea, aún con el "spanglish"*/
