@@ -186,12 +186,14 @@
 
       createCarrera(){
         this.llamarAPI({tipo:'post', ruta:'api/carrera'})
+        this.active = !this.active
       },
       getCarrera(){
         this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
       },
       updateCarrera(){
         this.llamarAPI({tipo:'put', ruta:'api/carrera/', id:this.form.id})
+        this.active = !this.active
         this.form.reset()
       },
       deleteCarrera(id){
