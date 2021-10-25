@@ -121,7 +121,7 @@ Vue.mixin({
 	            .then(()=>{
 	            	this.$swal(
 			            'Listo',
-			            'La información ha sido creada exitosamente',
+			            'La informacion ha sido creada exitosamente',
 			            'success'
 			        )
 	              Fire.$emit('recargar');
@@ -136,11 +136,11 @@ Vue.mixin({
 	          break;
 
 	          case 'put':
-	            this.[info].put(ruta+id)
+	            this[info].put(ruta+id)
 	            .then(()=>{
 	            	this.$swal(
 			            'Listo',
-			            'La información ha sido actualizada/editada exitosamente',
+			            'La informacion ha sido actualizada/editada exitosamente',
 			            'success'
 			        )
 	              	Fire.$emit('recargar');
@@ -163,12 +163,12 @@ Vue.mixin({
 		          showCancelButton: true,
 		          confirmButtonColor: '#3085d6',
 		          cancelButtonColor: '#d33',
-		          confirmButtonText: 'Si, bórralo'
+		          confirmButtonText: 'Si, elimínalo'
 		        }).then((result) => {
 		        	// Si responde SI
 		          if (result.isConfirmed) {
 		          	//Envía la solicitud para borrar
-		            this.[info].delete(ruta+id)
+		            this[info].delete(ruta+id)
 			            .then(()=>{
 			            	//Muestra una alerta de que se eliminó exitosamente
 			              	this.$swal(
