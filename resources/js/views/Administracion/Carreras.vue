@@ -157,14 +157,15 @@
     }),
     mounted() {
       this.getCarrera();
-      this.ARRAY_ICONOS = ARRAY_ICONOS;
     },
     created() {
+      this.ARRAY_ICONOS = ARRAY_ICONOS;
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
           this.getCarrera();
       });
     },
+
     methods: { 
 
       modalCrear(){
@@ -187,17 +188,22 @@
       createCarrera(){
         this.llamarAPI({tipo:'post', ruta:'api/carrera'})
         this.active = !this.active
+        Fire.$emit('recargar');
       },
       getCarrera(){
+
+        /* Esta función ya se hace en el navbar, encontrar una forma de pasar esa información hasta acá */
         this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
       },
       updateCarrera(){
         this.llamarAPI({tipo:'put', ruta:'api/carrera/', id:this.form.id})
         this.active = !this.active
         this.form.reset()
+        Fire.$emit('recargar');
       },
       deleteCarrera(id){
         this.llamarAPI({tipo:'delete', ruta:'api/carrera/', id:id})
+        Fire.$emit('recargar');
       },
     },
   }

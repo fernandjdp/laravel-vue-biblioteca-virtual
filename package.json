@@ -30,10 +30,10 @@
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "@fortawesome/vue-fontawesome": "^2.0.6",
         "pdfobject": "^2.2.7",
-        "sweetalert2": "^11.1.9",
         "vform": "^2.1.1",
         "vue-atlas": "^2.1.8",
         "vue-router": "^3.5.2",
+        "vue-sweetalert2": "^5.0.2",
         "vuesax": "^4.0.1-alpha.25",
         "vuex": "^3.6.2",
         "vuex-router-sync": "^5.0.0"

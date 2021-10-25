@@ -12,6 +12,14 @@ window.Vue = require('vue').default;
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
+/* Sweet Alert 2*/
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+Vue.use(VueSweetalert2);
+
+/* Rutas */
+
 import router from './routes'
 
 /* Store del vuex */
@@ -34,8 +42,6 @@ const store = new Vuex.Store({
 import { sync } from 'vuex-router-sync'
 
 sync(store, router);
-
-
 
 /* Vue Atlas (Estilo Atlassian) */
 
@@ -113,28 +119,75 @@ Vue.mixin({
 	          case 'post':
 	            this[info].post(ruta)
 	            .then(()=>{
+	            	this.$swal(
+			            'Listo',
+			            'La información ha sido creada exitosamente',
+			            'success'
+			        )
 	              Fire.$emit('recargar');
 	            })
 	            .catch(()=>{
+	            	this.$swal(
+		              'Error!',
+		              'No se pudo realizar esta accion',
+		              'error'
+		        	)
 	            })
 	          break;
 
 	          case 'put':
 	            this.[info].put(ruta+id)
 	            .then(()=>{
-	              Fire.$emit('recargar');
+	            	this.$swal(
+			            'Listo',
+			            'La información ha sido actualizada/editada exitosamente',
+			            'success'
+			        )
+	              	Fire.$emit('recargar');
 	            })
 	            .catch(()=>{
+	            	this.$swal(
+		              'Error!',
+		              'No se pudo realizar esta accion',
+		              'error'
+		        	)
 	            });
 	          break;
 
 	          case 'delete':
-	            this.[info].delete(ruta+id)
-	            .then(()=>{
-	              Fire.$emit('recargar');
-	            })
-	            .catch(()=>{
-	            });
+	          // Inicia el swal para mostrar la alerta
+	          this.$swal({
+		          title: '¿Estas seguro/a?',
+		          text: "¡No podrás revertir esto!",
+		          icon: 'warning',
+		          showCancelButton: true,
+		          confirmButtonColor: '#3085d6',
+		          cancelButtonColor: '#d33',
+		          confirmButtonText: 'Si, bórralo'
+		        }).then((result) => {
+		        	// Si responde SI
+		          if (result.isConfirmed) {
+		          	//Envía la solicitud para borrar
+		            this.[info].delete(ruta+id)
+			            .then(()=>{
+			            	//Muestra una alerta de que se eliminó exitosamente
+			              	this.$swal(
+				              'Eliminado!',
+				              'La informacion ha sido eliminada exitosamente',
+				              'success'
+			              	)
+			            	Fire.$emit('recargar');
+		            	})
+		            	.catch(()=>{
+		            		//Si no se eliminó muestra el error
+		            		this.$swal(
+				              'Error!',
+				              'No se pudo realizar esta accion',
+				              'error'
+			            	)
+		            	});
+		          	}
+		        })
 	          break;
 	    	}
 	    },
