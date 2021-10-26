@@ -43,8 +43,9 @@ Route::get('trabajos-paginados', [App\Http\Controllers\API\TrabajoController::cl
 Route::put('aprobar/{id}', [App\Http\Controllers\API\TrabajoController::class, 'aprobar']);
 
 //Carreras
-Route::get('/carrera_especifica/{id}', [App\Http\Controllers\API\CarreraController::class, 'indexEspecifica']);
-Route::get('index_carreras_formateados', [App\Http\Controllers\API\CarreraController::class, 'formatearCarrerasAtlasSelect']);
+Route::get('carreras-paginadas', [App\Http\Controllers\API\CarreraController::class, 'indexList']);
+//Route::get('/carrera_especifica/{id}', [App\Http\Controllers\API\CarreraController::class, 'indexEspecifica']);
+//Route::get('index_carreras_formateados', [App\Http\Controllers\API\CarreraController::class, 'formatearCarrerasAtlasSelect']);
 
 // Usuarios 
 Route::get('index_estudiantes', [App\Http\Controllers\API\UserController::class, 'getEstudiantes']);

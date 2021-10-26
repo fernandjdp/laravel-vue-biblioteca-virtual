@@ -76,6 +76,9 @@
                           </vs-tr>
                          </template>
                         </vs-table>
+                        <div class="center">
+                          <vs-pagination v-model="pagina" infinite :length="total" />
+                        </div>
                       </div>
                     </vs-col>
                  </vs-row>
@@ -105,9 +108,11 @@
                   </va-form-item>
                 <va-form-item label="Icono" need>
                   <va-select
+                    name="Icono"
                     v-model="form.icono"
                     placeholder="Selecciona un icono"  
                     :search="true"
+                    :rules="[{type:'required'}]"
                     menu-max-height="100"
                     :input-placeholder="'Icono'"
                     :options="ARRAY_ICONOS">
@@ -149,6 +154,8 @@
       active: false, 
       edicion:false,
       carreras: [],
+      pagina:1,
+      total:0,
       form: new Form({
         id:'',
         nombre:'',
@@ -162,11 +169,27 @@
       this.ARRAY_ICONOS = ARRAY_ICONOS;
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
+          this.form.reset()
           this.getCarrera();
       });
     },
 
-    methods: { 
+    watch: {
+        pagina: {
+            handler: function () {
+              this.paginacion()
+            },
+          },
+       },
+
+    methods: {
+
+      paginacion() {
+        axios.get('/api/carreras-paginadas?page=' + this.pagina)
+          .then(response => {
+            this.carreras = response.data[0].data;
+          });
+      },
 
       modalCrear(){
         this.edicion = false
@@ -184,14 +207,16 @@
       },
 
       /* Un CRUD (Create, Read, Update, Delete) permite, como su nombre en inglés lo indica, crear, leer, actualizar y eliminar información, por lo tanto uso los mismos nombres en inglés para las funciones de tal forma que se mantenga la idea, aún con el "spanglish"*/
-
+      
       createCarrera(){
         this.llamarAPI({tipo:'post', ruta:'api/carrera'})
         this.active = !this.active
         Fire.$emit('recargar');
       },
       getCarrera(){
-
+        this.llamarAPI({tipo:'get-paginado', ruta:'api/carreras-paginadas', variable:'carreras', variable2:'total'})
+      },
+      getCarrerax(){
         /* Esta función ya se hace en el navbar, encontrar una forma de pasar esa información hasta acá */
         this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
       },

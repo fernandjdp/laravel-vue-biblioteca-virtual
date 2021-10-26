@@ -253,7 +253,7 @@
             .then(response => {
               this.usuarios = response.data[0].data;
             });
-          },
+      },
       
       modalCrear(){
         this.edicion = false

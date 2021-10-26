@@ -18,9 +18,15 @@ class CarreraController extends Controller
     {
         return Carrera::with('lineas')->get();
     }
-    // Hacer esto con un scope porque qué ladillas
-    public function indexEspecifica($id){
-        return Carrera::with('lineas')->where('id',$id)->first();
+
+    public function indexList()
+    {
+        $cantidad_por_pagina = 5;
+        $info = Carrera::with('lineas')->latest()->paginate($cantidad_por_pagina);
+        $total = Carrera::all()->count();
+        $paginas_totales = ceil($total / $cantidad_por_pagina);
+
+        return [$info, $paginas_totales];
     }
 
     public function formatearCarrerasAtlasSelect(){
