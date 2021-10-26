@@ -121,7 +121,7 @@
             <template #footer>
               <div class="footer-dialog">
                 <vs-button @click="edicion ? updateRama() : createRama()" color="rgb(22,212,149)" block>
-                  Crear
+                  <h4 class="text-white" v-show="!edicion">Crear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
                 </vs-button>
               </div>
             </template>
@@ -178,7 +178,6 @@
       },
       getRama(){
         this.llamarAPI({tipo:'get', ruta:'api/linea', variable:'lineas'})
-        console.log("MEMES")
       },
       getCarrera(){
         this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
