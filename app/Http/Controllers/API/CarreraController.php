@@ -48,6 +48,7 @@ class CarreraController extends Controller
     {
         $this->validate($request,[
             'nombre' => 'required|string|max:191',
+            'icono' => 'required|string'
         ]);
 
         return Carrera::create([
@@ -69,6 +70,7 @@ class CarreraController extends Controller
 
         $this->validate($request,[
             'nombre' => 'required|string|max:191',
+            'icono' => 'required|string'
         ]);
 
         $carrera->update($request->all());
