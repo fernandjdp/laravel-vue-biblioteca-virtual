@@ -153,6 +153,7 @@
     created() {
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
+          this.form.reset()
           this.getRama();
           this.getCarrera()
       });
@@ -186,9 +187,11 @@
         this.llamarAPI({tipo:'put', ruta:'api/linea/', id:this.form.id})
         this.form.reset()
         this.active = !this.active;
+        Fire.$emit('recargar');
       },
       deleteRama(id){
         this.llamarAPI({tipo:'delete', ruta:'api/linea/', id:id})
+        Fire.$emit('recargar');
       },
     },
   }
