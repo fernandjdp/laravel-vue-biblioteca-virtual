@@ -76,6 +76,9 @@
                           </vs-tr>
                          </template>
                         </vs-table>
+                        <div class="center">
+                          <vs-pagination v-model="pagina" infinite :length="total" />
+                        </div>
                       </div>
                     </vs-col>
                  </vs-row>
@@ -139,6 +142,8 @@
       active: false, 
       carreras: [],
       edicion:false,
+      pagina:1,
+      total:0,
       form: new Form({
         id:undefined,
         nombre:'',
@@ -146,10 +151,12 @@
       }),
       lineas: [],
     }),
+
     mounted() {
       this.getRama();
       this.getCarrera()
     },
+
     created() {
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
@@ -158,7 +165,23 @@
           this.getCarrera()
       });
     },
+
+    watch: {
+        pagina: {
+            handler: function () {
+              this.paginacion()
+            },
+          },
+       },
+
     methods: {
+
+      paginacion() {
+        axios.get('/api/lineas-paginadas?page=' + this.pagina)
+          .then(response => {
+            this.lineas = response.data[0].data;
+          });
+      },
       
       modalCrear(){
         this.edicion = false
@@ -178,7 +201,7 @@
         this.active = !this.active;
       },
       getRama(){
-        this.llamarAPI({tipo:'get', ruta:'api/linea', variable:'lineas'})
+        this.llamarAPI({tipo:'get-paginado', ruta:'api/lineas-paginadas', variable:'lineas', variable2:'total'})
       },
       getCarrera(){
         this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})

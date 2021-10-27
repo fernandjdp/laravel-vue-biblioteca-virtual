@@ -18,6 +18,16 @@ class LineaController extends Controller
         return Linea::with('carrera')->get();
     }
 
+    public function indexList()
+    {
+        $cantidad_por_pagina = 5;
+        $info = Linea::with('carrera')->latest()->paginate($cantidad_por_pagina);
+        $total = Linea::all()->count();
+        $paginas_totales = ceil($total / $cantidad_por_pagina);
+
+        return [$info, $paginas_totales];
+    }
+
     public function formatearLineasAtlasSelect(){
         $array_lineas = [];
         $lineas = Linea::select('id','nombre')->get();

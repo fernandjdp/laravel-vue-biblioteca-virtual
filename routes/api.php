@@ -52,6 +52,7 @@ Route::get('index_estudiantes', [App\Http\Controllers\API\UserController::class,
 Route::get('index_estudiantes_formateados', [App\Http\Controllers\API\UserController::class, 'formatearEstudiantesAtlasSelect']);
 
 // Lineas
+Route::get('lineas-paginadas', [App\Http\Controllers\API\LineaController::class, 'indexList']);
 Route::get('index_lineas_formateados', [App\Http\Controllers\API\LineaController::class, 'formatearLineasAtlasSelect']);
 
 //Areas Tematicas
