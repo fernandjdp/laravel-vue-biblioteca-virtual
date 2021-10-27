@@ -235,7 +235,6 @@ Vue.component('info', require('./components/Biblioteca/InfoComponent.vue').defau
 // /Componentes
 
 // Dialogs
-Vue.component('dialog-nuevo-trabajo', require('./components/Dialogs/DialogNuevoTrabajoComponent.vue').default);
 Vue.component('dialog-detalles-trabajo', require('./components/Dialogs/DialogDetallesTrabajoComponent.vue').default);
 // /Dialogs
 
