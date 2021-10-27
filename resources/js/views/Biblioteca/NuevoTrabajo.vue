@@ -55,19 +55,21 @@
                   <va-input
                     name="Resumen"
                     v-model="pdfResumenNombre"
-                    placeholder="Haga click para seleccionar"
+                    disabled
+                    placeholder="Haga click en la carpeta a la derecha para seleccionar"
                     :rules="[{type:'required', tip:'Este campo es necesario'}]"
-                    clearable />
-                    <va-button @click="clickSeleccionarResumen" type="subtle"><va-icon type="pen" /></va-button>
+                    />
+                    <va-button @click="clickSeleccionarResumen" type="subtle"><va-icon type="folder-open" /></va-button>
                 </va-form-item>
                 <va-form-item label="Trabajo de grado" need>
                   <va-input
                     name="Trabajo"
                     v-model="pdfTrabajoNombre"
-                    placeholder="Haga click para seleccionar"
+                    disabled
+                    placeholder="Haga click en la carpeta a la derecha para seleccionar"
                     :rules="[{type:'required', tip:'Este campo es necesario'}]"
-                    clearable />
-                <va-button @click="clickSeleccionarTrabajo" type="subtle"><va-icon type="pen"/></va-button>
+                    />
+                <va-button @click="clickSeleccionarTrabajo" type="subtle"><va-icon type="folder-open"/></va-button>
                 </va-form-item>
               </va-form>
               </div>
@@ -96,6 +98,7 @@
                         search
                         multiple
                         name="Carrera"
+                        limit="5"
                         v-model="form.autores"
                         :options="estudiantes"
                         :rules="[{type:'required'}]">
@@ -137,6 +140,10 @@
         @change="pdfTrabajoSeleccionado"
         >
     </div>
+
+    <!-- LOADING -->
+    <va-loading v-if="cargando" size="lg" color="blue" center></va-loading>
+
   </div>
 </template>
 
@@ -148,6 +155,7 @@
       carreras:[],
       estudiantes:[],
       lineas:[],
+      cargando:false,
       pdfTrabajoNombre: '',
       pdfResumenNombre:'',
       form: new Form({
@@ -180,7 +188,9 @@
     methods: {
 
       crearNuevoTrabajo(){
+        this.cargando = !this.cargando
         this.llamarAPI({tipo:'post', ruta:'api/trabajo'})
+        this.cargando = !this.cargando
       },
       getInfoSelectAreasTematicas(){
         this.llamarAPI({tipo:'get', ruta:'api/index_areas_tematicas_formateados', variable:'areas_tematicas'})

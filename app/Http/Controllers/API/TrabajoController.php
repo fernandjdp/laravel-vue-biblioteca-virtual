@@ -59,7 +59,7 @@ class TrabajoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function crearRuta($item)
+    private function crearRuta($item)
     {
         $nombre_archivo = date('dmy-m').'_'.$item->getClientOriginalName();
 
@@ -76,12 +76,12 @@ class TrabajoController extends Controller
         
         return $ruta_item;
     }
-    public function crearRutaResumen($item){
+    private function crearRutaResumen($item){
         $nombre_archivo = date('dmy-m').'_'.$item->getClientOriginalName();
         $ruta_item = '/resumenes/' . $nombre_archivo;
         return $ruta_item;
     }
-    public function cargarResumen($item){
+    private function cargarResumen($item){
         $nombre_archivo = date('dmy-m').'_'.$item->getClientOriginalName();
         $item->move('resumenes', $nombre_archivo);
         return ['message' => 'Trabajo registrado exitosamente'];
@@ -93,7 +93,7 @@ class TrabajoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function cargarItem($item)
+    private function cargarItem($item)
     {
         $nombre_archivo = date('dmy-m').'_'.$item->getClientOriginalName();
 
