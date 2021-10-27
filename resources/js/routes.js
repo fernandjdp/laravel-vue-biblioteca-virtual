@@ -16,16 +16,8 @@ export default new VueRouter({
 	    { path: '/revision', component: require('./views/Administracion/Revision.vue').default },
 	    //{ path: '/perfil', component: require('./views/Perfil.vue').default },
 
-	    /* PRUEBA */
-	    { path: '/biblioteca-:carrera_id', component: require('./views/Biblioteca/Biblioteca.vue').default },
-	    /* PRUEBA */
-
 	    //Ruta de las vistas de las carreras
-	    { path: '/derecho', component: require('./views/Biblioteca/Derecho.vue').default },
-	    { path: '/ingenieria-electronica', component: require('./views/Biblioteca/Electronica.vue').default },    
-	    { path: '/ingenieria-ambiental', component: require('./views/Biblioteca/Ambiental.vue').default },
-	    { path: '/procesos-gerenciales', component: require('./views/Biblioteca/Procesos.vue').default },
-	    { path: '/turismo', component: require('./views/Biblioteca/Turismo.vue').default },
+	    { path: '/biblioteca-:carrera_id', component: require('./views/Biblioteca/Biblioteca.vue').default },
 
 	    // Nuevo Trabajo de Grado
 	    { path: '/nuevo-trabajo', component: require('./views/Biblioteca/NuevoTrabajo.vue').default },
