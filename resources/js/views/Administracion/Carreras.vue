@@ -216,10 +216,6 @@
       getCarrera(){
         this.llamarAPI({tipo:'get-paginado', ruta:'api/carreras-paginadas', variable:'carreras', variable2:'total'})
       },
-      getCarrerax(){
-        /* Esta función ya se hace en el navbar, encontrar una forma de pasar esa información hasta acá */
-        this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
-      },
       updateCarrera(){
         this.llamarAPI({tipo:'put', ruta:'api/carrera/', id:this.form.id})
         this.active = !this.active
