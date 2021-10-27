@@ -69,6 +69,7 @@ class LineaController extends Controller
 
         $this->validate($request,[
             'nombre' => 'required|string|max:191',
+            'carrera_id' => 'required'
         ]);
 
         $Linea->update($request->all());

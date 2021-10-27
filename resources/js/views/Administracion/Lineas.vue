@@ -95,30 +95,30 @@
                 Ingresa una nueva <b>Linea</b>
               </h4>
             </template>
-            <vs-row class="pt-4" justify="center">
-              <vs-col class="px-2" w="6">
-                <div class="center content-inputs">
-                  <vs-input
-                    type="text"
-                    v-model="form.nombre"
-                    label="Nombre"
-                    placeholder="Internet de las Cosas"
-                  />
-                </div>
-              </vs-col>
-              <vs-col class="px-2" w="6">
-                <div class="center">
-                  <vs-select label="Carrera" placeholder="Ingeniería Electrónica" v-model="form.carrera_id" :key="carreras.length">
-                    <vs-option 
-                      v-for="carrera in carreras"
-                      :key="carrera.id" 
-                      :value="carrera.id"
-                      :label="carrera.nombre" 
-                    >
-                      {{ carrera.nombre }}
-                    </vs-option>
-                  </vs-select>
-                </div>
+            <vs-row class="pt-1" justify="center">
+              <vs-col class="px-2" w="12">
+                <va-form ref="form" type="vertical">
+                  <va-form-item label="Nombre" need>
+                    <va-input
+                      name="Nombre"
+                      v-model="form.nombre"
+                      placeholder="Ej: Internet de las Cosas"
+                      :rules="[{type:'required', tip:'Este campo es necesario'}]"
+                      clearable />
+                  </va-form-item>
+                <va-form-item label="Icono" need>
+                  <va-select
+                    name="Carrera"
+                    v-model="form.carrera_id"
+                    placeholder="Selecciona una carrera"  
+                    :search="true"
+                    :rules="[{type:'required'}]"
+                    menu-max-height="100"
+                    :input-placeholder="'Icono'"
+                    :options="carreras">
+                  </va-select>
+                </va-form-item>
+                </va-form>
               </vs-col>
             </vs-row>
             <template #footer>
@@ -199,16 +199,16 @@
       createRama(){
         this.llamarAPI({tipo:'post', ruta:'api/linea'})
         this.active = !this.active;
+        Fire.$emit('recargar');
       },
       getRama(){
         this.llamarAPI({tipo:'get-paginado', ruta:'api/lineas-paginadas', variable:'lineas', variable2:'total'})
       },
       getCarrera(){
-        this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
+        this.llamarAPI({tipo:'get', ruta:'api/index_carreras_formateados', variable:'carreras'})
       },
       updateRama(){
         this.llamarAPI({tipo:'put', ruta:'api/linea/', id:this.form.id})
-        this.form.reset()
         this.active = !this.active;
         Fire.$emit('recargar');
       },
