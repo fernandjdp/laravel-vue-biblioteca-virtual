@@ -30,9 +30,9 @@ class LineaController extends Controller
 
     public function formatearLineasAtlasSelect(){
         $array_lineas = [];
-        $lineas = Linea::select('id','nombre')->get();
+        $lineas = Linea::select('id','nombre', 'carrera_id')->get();
         foreach ($lineas as $key => $value) {
-            array_push($array_lineas, (object)['value' => $value->id, 'label' => $value->nombre]);       
+            array_push($array_lineas, (object)['value' => $value->id, 'label' => $value->nombre, 'carrera_id' => $value->carrera_id]);       
         }
         return $array_lineas;
     }

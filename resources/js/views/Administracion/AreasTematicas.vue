@@ -116,7 +116,7 @@
                     search
                     name="Carrera"
                     v-model="form.carrera_id"
-                    :options="options"
+                    :options="carreras"
                     :rules="[{type:'required'}]">
                   </va-select>
                 </va-form-item>
@@ -125,15 +125,8 @@
                     search
                     name="Linea"
                     v-model="form.linea_id"
-                    :rules="[{type:'required'}]">
-                    <va-option 
-                    v-for="(carrera, index) in lineas"
-                    :key="index"
-                    :value="carrera.id"
-                    :label="carrera.nombre"
-                    >
-                      {{carrera.nombre}}
-                    </va-option>
+                    :rules="[{type:'required'}]"
+                    :options="filtrarLineasPorCarreras">
                   </va-select>
                 </va-form-item>
               </va-form>
@@ -141,7 +134,7 @@
             <template #footer>
               <div class="footer-dialog">
                 <vs-button @click="edicion ? updateArea() : createArea()" color="rgb(22,212,149)" block>
-                  Crear
+                  <h4 class="text-white" v-show="!edicion">Crear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
                 </vs-button>
               </div>
             </template>
@@ -178,10 +171,18 @@
     created() {
       Fire.$on('recargar',() => {
         //Buscar la manera de recargar la página
+          this.form.reset()
           this.getLinea();
           this.getCarrera();
           this.getAreaTematica();
       });
+    },
+
+    computed:{
+      // Busco filtrar las lineas por carreras en la vista en vez de filtrarlas desde el controlador
+      filtrarLineasPorCarreras: function(){
+        return this.lineas.filter(linea => (linea.carrera_id==this.form.carrera_id))
+      }
     },
 
     watch: {
@@ -215,25 +216,27 @@
       /* Un CRUD (Create, Read, Update, Delete) permite, como su nombre en inglés lo indica, crear, leer, actualizar y eliminar información, por lo tanto uso los mismos nombres en inglés para las funciones de tal forma que se mantenga la idea, aún con el "spanglish"*/
 
       createArea(){
-        this.llamarAPI({tipo:'post', ruta:'api/linea'})
+        this.llamarAPI({tipo:'post', ruta:'api/areasTematicas'})
         this.active = !this.active;
+        Fire.$emit('recargar');
       },
       getAreaTematica(){
         this.llamarAPI({tipo:'get-paginado', ruta:'api/areasTematicas', variable:'areas_tematicas', variable2:'total'})
       },
       getLinea(){
-        this.llamarAPI({tipo:'get', ruta:'api/linea', variable:'lineas'})
+        this.llamarAPI({tipo:'get', ruta:'api/index_lineas_formateados', variable:'lineas'})
       },
       getCarrera(){
-        this.llamarAPI({tipo:'get', ruta:'api/carrera', variable:'carreras'})
+        this.llamarAPI({tipo:'get', ruta:'api/index_carreras_formateados', variable:'carreras'})
       },
       updateArea(){
         this.llamarAPI({tipo:'put', ruta:'api/areasTematicas/', id:this.form.id})
-        this.form.reset()
         this.active = !this.active;
+        Fire.$emit('recargar');
       },
       deleteArea(id){
         this.llamarAPI({tipo:'delete', ruta:'api/areasTematicas/', id:id})
+        Fire.$emit('recargar');
       },
     },
   }
