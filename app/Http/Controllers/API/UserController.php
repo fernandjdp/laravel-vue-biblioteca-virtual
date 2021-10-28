@@ -168,9 +168,9 @@ class UserController extends Controller
 
     public function formatearEstudiantesAtlasSelect(){
         $array_estudiantes = [];
-        $estudiantes = User::where('tipo_usuario_id',1)->select('id','name','last_name', 'cedula')->get();
+        $estudiantes = User::where('tipo_usuario_id',1)->select('id','name','last_name', 'cedula', 'trabajo_id')->get();
         foreach ($estudiantes as $key => $value) {
-            array_push($array_estudiantes, (object)['value' => $value->id, 'label' => "[".$value->cedula."]".$value->last_name]);       
+            array_push($array_estudiantes, (object)['value' => $value->id, 'label' => "[".$value->cedula."]".$value->last_name, 'trabajo_id' => $value->trabajo_id]);       
         }
         return $array_estudiantes;
     }

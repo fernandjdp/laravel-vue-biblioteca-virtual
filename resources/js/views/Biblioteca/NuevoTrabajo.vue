@@ -100,7 +100,7 @@
                         name="Carrera"
                         :limit="5"
                         v-model="form.autores"
-                        :options="estudiantes"
+                        :options="filtrarEstudiantesConTrabajosRegistrados"
                         :rules="[{type:'required'}]">
                       </va-select>
                     </va-form-item>
@@ -189,7 +189,11 @@
 
       filtrarAreasPorLineas: function(){
         return this.areas_tematicas.filter(area => (area.linea_id==this.form.linea_id))
-      }
+      },
+
+      filtrarEstudiantesConTrabajosRegistrados: function(){
+        return this.estudiantes.filter(estudiante => (estudiante.trabajo_id == null))
+      },
     },
 
     methods: {
