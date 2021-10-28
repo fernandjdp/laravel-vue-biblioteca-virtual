@@ -8,16 +8,6 @@
               <vs-col w=4>
                 <h3>Revisión - Trabajos Especiales de Grado</h3>
               </vs-col>
-               <vs-col offset="7" w=1>
-                <!--<vs-button
-                 icon
-                 color="rgb(22,212,149)"
-                 :active="active == 0"
-                 @click="modalCrear"
-                >
-                <font-awesome-icon icon="plus" />
-              </vs-button>-->
-              </vs-col>
             </vs-row>
         </div>
         <div class="card-body">
@@ -73,7 +63,8 @@
                             {{ tr.descripcion }}
                             </vs-td>
                             <vs-td>
-                            {{ tr.aprobado }}
+                              <va-lozenge v-show="tr.aprobado" type="success">Aprobado</va-lozenge>
+                              <va-lozenge v-show="!tr.aprobado" type="help">En espera</va-lozenge>
                             </vs-td>
                             <template #expand>
                               <div class="con-content">       
@@ -83,12 +74,12 @@
                                       Editar
                                     </vs-button>
                                     </vs-col>
-                                    <vs-col w="1">
+                                    <vs-col v-if="!tr.aprobado" w="1">
                                     <vs-button @click="deleteTrabajo(tr.id)" border danger>
                                       Eliminar
                                     </vs-button>
                                   </vs-col>  
-                                  <vs-col w="1">
+                                  <vs-col v-if="!tr.aprobado" w="1">
                                     <vs-button @click="aprobarTrabajo(tr.id)" border success>
                                       Aprobar
                                     </vs-button>
@@ -113,9 +104,6 @@
             <template #header>
               <h4 v-if="edicion"class="not-margin">
                 Edita/actualiza el <b>Trabajo Especial de Grado</b>
-              </h4>
-              <h4 v-else class="not-margin">
-                Ingresa una nueva <b>Área Temática</b>
               </h4>
             </template>
 
