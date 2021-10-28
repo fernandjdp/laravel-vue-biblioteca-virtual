@@ -80,7 +80,7 @@
                         search
                         name="Linea"
                         v-model="form.linea_id"
-                        :options="lineas"
+                        :options="filtrarLineasPorCarreras"
                         :rules="[{type:'required'}]">
                       </va-select>
                     </va-form-item>
@@ -89,7 +89,7 @@
                         search
                         name="AreaTematica"
                         v-model="form.area_tematica_id"
-                        :options="areas_tematicas"
+                        :options="filtrarAreasPorLineas"
                         :rules="[{type:'required'}]">
                       </va-select>
                     </va-form-item>
@@ -98,7 +98,7 @@
                         search
                         multiple
                         name="Carrera"
-                        limit="5"
+                        :limit="5"
                         v-model="form.autores"
                         :options="estudiantes"
                         :rules="[{type:'required'}]">
@@ -181,9 +181,16 @@
       //
     },
 
-    watch: {
-      //
-       },
+    computed:{
+      // Busco filtrar las lineas por carreras en la vista en vez de filtrarlas desde el controlador
+      filtrarLineasPorCarreras: function(){
+        return this.lineas.filter(linea => (linea.carrera_id==this.form.carrera_id))
+      },
+
+      filtrarAreasPorLineas: function(){
+        return this.areas_tematicas.filter(area => (area.linea_id==this.form.linea_id))
+      }
+    },
 
     methods: {
 
