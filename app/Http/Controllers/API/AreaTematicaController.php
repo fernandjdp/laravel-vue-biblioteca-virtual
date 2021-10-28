@@ -25,9 +25,9 @@ class AreaTematicaController extends Controller
 
     public function formatearAreasTematicasAtlasSelect(){
         $array_areas = [];
-        $areas_tematicas = areaTematica::select('id','nombre')->get();
+        $areas_tematicas = areaTematica::select('id','nombre', 'linea_id')->get();
         foreach ($areas_tematicas as $key => $value) {
-            array_push($array_areas, (object)['value' => $value->id, 'label' => $value->nombre]);       
+            array_push($array_areas, (object)['value' => $value->id, 'label' => $value->nombre, 'linea_id' => $value->linea_id]);       
         }
         return $array_areas;
     }
