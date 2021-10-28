@@ -140,30 +140,11 @@
               <div class="col-6">
                 <va-form ref="form" type="vertical">
                 <va-form-item label="Descripcion" need>
-                  <va-input
-                    name="Descripcion"
-                    v-model="form.descripcion"
-                    placeholder=""
-                    :rules="[{type:'required', tip:'Este campo es necesario'}]"
-                    clearable />
-                </va-form-item>
-                <va-form-item label="Resumen del trabajo de grado" need>
-                  <va-input
-                    name="Resumen"
-                    v-model="pdfResumenNombre"
-                    placeholder="Haga click para seleccionar"
-                    :rules="[{type:'required', tip:'Este campo es necesario'}]"
-                    clearable />
-                    <va-button @click="clickSeleccionarResumen" type="subtle"><va-icon type="pen" /></va-button>
-                </va-form-item>
-                <va-form-item label="Trabajo de grado" need>
-                  <va-input
-                    name="Trabajo"
-                    v-model="pdfTrabajoNombre"
-                    placeholder="Haga click para seleccionar"
-                    :rules="[{type:'required', tip:'Este campo es necesario'}]"
-                    clearable />
-                <va-button @click="clickSeleccionarTrabajo" type="subtle"><va-icon type="pen"/></va-button>
+                  <va-textarea 
+                  v-model="form.descripcion"
+                  :resize="true"
+                  minHeight="180px">
+                  </va-textarea>
                 </va-form-item>
               </va-form>
               </div>
@@ -255,6 +236,12 @@
         //Buscar la manera de recargar la página
           this.getTrabajosPaginados();
       });
+    },
+
+    computed:{
+      formatearAutoresSelect: function(){
+        return this.lineas.filter(linea => (linea.carrera_id==this.form.carrera_id))
+      }
     },
 
     watch: {
