@@ -3,7 +3,8 @@
 /public/storage
 /public/js/app.js
 /storage/*.key
-/resumenes/*
+/public/resumenes/*
+/public/trabajos_especiales/*
 /vendor
 .env
 .env.backup
