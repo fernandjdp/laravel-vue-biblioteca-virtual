@@ -163,7 +163,7 @@
                       <va-select
                         search
                         name="AreaTematica"
-                        v-model="form.area_tematica_id"
+                        v-model="form.areaTematica_id"
                         :options="areas_tematicas"
                         :rules="[{type:'required'}]">
                       </va-select>
@@ -197,7 +197,7 @@
                   </div>
                 </div>
                 <vs-button @click="edicion ? updateArea() : createArea()" color="rgb(22,212,149)" block>
-                  <h4 class="text-white" v-show="!edicion">Crear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
+                  <h4 class="text-white" v-show="!edicion"><CENTER></CENTER>rear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
                 </vs-button>
               </div>
             </template>
@@ -226,7 +226,7 @@
       form: new Form({
         id:undefined,
         alias:'',
-        area_tematica_id:'',
+        areaTematica_id:'',
         autores:[],
         carrera_id:'',
         descripcion:'',
@@ -276,7 +276,7 @@
         this.form.fill(info)
 
         this.form.autores = this.form.autores.map(item => {
-          const container = [item.id];
+          const container = item.id;
 
           return container;
         }) 
