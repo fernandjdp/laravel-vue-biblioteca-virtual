@@ -172,6 +172,7 @@
                       <va-select
                         search
                         multiple
+                        readonly
                         name="Autores"
                         v-model="form.autores"
                         :options="estudiantes"
@@ -186,18 +187,18 @@
               <div class="footer-dialog">
                 <div class="row">
                   <div class="col-6">
-                    <vs-button @click="edicion ? updateArea() : createArea()" :href="'.'+form.ruta_resumen_pdf" blank primary block>
+                    <vs-button :href="'.'+form.ruta_resumen_pdf" blank primary block>
                       <h4 class="text-white">Mostrar Resumen</h4>
                     </vs-button>
                   </div>
                   <div class="col-6">
-                    <vs-button @click="edicion ? updateArea() : createArea()" :href="'.'+form.ruta_trabajo_pdf" blank warn block>
+                    <vs-button :href="'.'+form.ruta_trabajo_pdf" blank warn block>
                       <h4>Mostrar Trabajo de grado</h4>
                     </vs-button>
                   </div>
                 </div>
-                <vs-button @click="edicion ? updateArea() : createArea()" color="rgb(22,212,149)" block>
-                  <h4 class="text-white" v-show="!edicion"><CENTER></CENTER>rear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
+                <vs-button @click="updateTrabajo" color="rgb(22,212,149)" block>
+                  <h4 class="text-white">Actualizar</h4>
                 </vs-button>
               </div>
             </template>
@@ -287,8 +288,9 @@
       aprobarTrabajo(id){
         this.llamarAPI({tipo:'put', ruta:'api/aprobar/', id:id})
       },
-      crearNuevoTrabajo(){
-        this.llamarAPI({tipo:'post', ruta:'api/trabajo'})
+      updateTrabajo(id){
+        this.llamarAPI({tipo:'put', ruta:'api/trabajo/', id:id})
+        this.active = !this.active
       },
       getTrabajosPaginados(){
         this.llamarAPI({tipo:'get-paginado', ruta:'api/trabajos-paginados', variable:'trabajos', variable2:'total'})

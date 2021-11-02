@@ -132,7 +132,6 @@ class TrabajoController extends Controller
             'autores' => 'required',
         ]);
 
-        //$ruta_img = $this->crearRuta($request->ruta_img);
         $ruta_resumen_pdf = $this->crearRutaResumen($request->ruta_resumen_pdf);
         $ruta_trabajo_pdf = $this->crearRuta($request->ruta_trabajo_pdf);
 
@@ -146,7 +145,6 @@ class TrabajoController extends Controller
             'ruta_img' => 'Datos_Falsos',
             'ruta_resumen_pdf' => $ruta_resumen_pdf,
             'ruta_trabajo_pdf' => $ruta_trabajo_pdf,
-            //'autores_id' => $request->autores,
             'aprobado' => false
         ]);
 
@@ -176,10 +174,19 @@ class TrabajoController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        /* Los autores del trabajo de grado NO PODRAN SER MODIFICADOS*/
         $Trabajo = Trabajo::findOrFail($request->id);
 
         $this->validate($request,[
             'nombre' => 'required|string|max:191',
+            'alias' => 'required',
+            'descripcion' => 'required',
+            'carrera_id' => 'required',
+            'linea_id' => 'required',
+            'areaTematica_id' => 'required',
+            'ruta_resumen_pdf' => 'required|string',
+            'ruta_trabajo_pdf' => 'required|string',
+            'autores' => 'required',
         ]);
 
         $Trabajo->update($request->all());
