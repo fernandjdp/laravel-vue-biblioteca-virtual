@@ -184,8 +184,20 @@
 
             <template #footer>
               <div class="footer-dialog">
+                <div class="row">
+                  <div class="col-6">
+                    <vs-button @click="edicion ? updateArea() : createArea()" :href="'.'+form.ruta_resumen_pdf" blank primary block>
+                      <h4 class="text-white">Mostrar Resumen</h4>
+                    </vs-button>
+                  </div>
+                  <div class="col-6">
+                    <vs-button @click="edicion ? updateArea() : createArea()" :href="'.'+form.ruta_trabajo_pdf" blank warn block>
+                      <h4>Mostrar Trabajo de grado</h4>
+                    </vs-button>
+                  </div>
+                </div>
                 <vs-button @click="edicion ? updateArea() : createArea()" color="rgb(22,212,149)" block>
-                  Crear
+                  <h4 class="text-white" v-show="!edicion">Crear</h4><h4 class="text-white" v-show="edicion">Actualizar</h4>
                 </vs-button>
               </div>
             </template>
@@ -238,12 +250,6 @@
       });
     },
 
-    computed:{
-      formatearAutoresSelect: function(){
-        return this.lineas.filter(linea => (linea.carrera_id==this.form.carrera_id))
-      }
-    },
-
     watch: {
         pagina: {
             handler: function () {
@@ -263,10 +269,17 @@
         this.edicion = false
         this.active = !this.active
       },
+    
       modalEdicion(info){
         this.edicion = true
         this.active = !this.active
         this.form.fill(info)
+
+        this.form.autores = this.form.autores.map(item => {
+          const container = [item.id];
+
+          return container;
+        }) 
       },
       deleteTrabajo(id){
         this.llamarAPI({tipo:'delete', ruta:'api/trabajo/', id:id})
