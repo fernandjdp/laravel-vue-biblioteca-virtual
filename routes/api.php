@@ -32,6 +32,7 @@ Route::apiResources(['users' => 'App\Http\Controllers\API\UserController']);
 /******************************* NOTA IMPORTANTE ******************************
 *
 *	Esto se puede realizar también con laravel scopes. Investigar eso
+*    Y tambien se puede hacer con Computed Properties. Investgar eso
 *
 */
 
