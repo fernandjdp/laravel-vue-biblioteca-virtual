@@ -14,7 +14,7 @@ export default new VueRouter({
 	    { path: '/areas-tematicas', component: require('./views/Administracion/AreasTematicas.vue').default },
 	    { path: '/usuarios', component: require('./views/Administracion/Usuarios.vue').default },
 	    { path: '/revision', component: require('./views/Administracion/Revision.vue').default },
-	    //{ path: '/perfil', component: require('./views/Perfil.vue').default },
+	    { path: '/perfil', component: require('./views/Perfil.vue').default },
 
 	    //Ruta de las vistas de las carreras
 	    { path: '/biblioteca-:carrera_id', component: require('./views/Biblioteca/Biblioteca.vue').default },

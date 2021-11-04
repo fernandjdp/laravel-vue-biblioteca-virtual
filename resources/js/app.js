@@ -5,6 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
+
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
  
 import Vue from 'vue'
 window.Vue = require('vue').default;
