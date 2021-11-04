@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->foreign('tipo_usuario_id')->references('id')->on('tipo_usuarios')->onDelete('cascade');
             
             $table->string('cedula');
-            $table->string('telefono')->nullable();
 
             $table->integer('trabajo_id')->unsigned()->nullable();  
             $table->index('trabajo_id');
