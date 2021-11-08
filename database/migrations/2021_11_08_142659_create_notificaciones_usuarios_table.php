@@ -19,7 +19,7 @@ class CreateNotificacionesUsuariosTable extends Migration
             $table->integer('usuario_id')->unsigned();  
             $table->index('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
-
+            
             $table->string('titulo')
             $table->text('texto');
             $table->set('tipo', ['primary', 'success', 'danger', 'warning', 'info']);
