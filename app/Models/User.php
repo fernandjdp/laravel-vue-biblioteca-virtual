@@ -24,6 +24,9 @@ class User extends Authenticatable
         'trabajo_id',
         'email',
         'password',
+        'telefono',
+        'telegram',
+        'linkedin_url'
     ];
 
     /**

@@ -140,7 +140,6 @@ class UserController extends Controller
         ]);
 
         $user->update($request->all());
-        dd($user);
         return ['message' => 'Updated the user info'];
     }
 
