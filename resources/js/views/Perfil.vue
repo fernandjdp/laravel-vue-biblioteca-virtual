@@ -101,19 +101,19 @@
 							      <h4>Primary Callout</h4>
 							      This is a primary callout.
 							    </div>
-							    <div class="bd-callout bd-callout-primary">
+							    <div class="bd-callout bd-callout-success">
 							      <h4>Primary Callout</h4>
 							      This is a primary callout.
 							    </div>
-							    <div class="bd-callout bd-callout-primary">
+							    <div class="bd-callout bd-callout-info">
 							      <h4>Primary Callout</h4>
 							      This is a primary callout.
 							    </div>
-							    <div class="bd-callout bd-callout-primary">
+							    <div class="bd-callout bd-callout-danger">
 							      <h4>Primary Callout</h4>
 							      This is a primary callout.
 							    </div>
-							    <div class="bd-callout bd-callout-primary">
+							    <div class="bd-callout bd-callout-warning">
 							      <h4>Primary Callout</h4>
 							      This is a primary callout.
 							    </div>
@@ -219,6 +219,7 @@ export default {
       carreras:[],
       estudiantes:[],
       lineas:[],
+      notificaciones:[],
     	info_trabajo: new Form({
     		nombre:'',
     		alias:'',
@@ -234,6 +235,7 @@ export default {
         tipo_usuario_id:'',
         cedula:'',
         telefono:'',
+        trabajo_id:'',
         email:'',
         telegram:'',
         linkedin_url:'',
@@ -248,26 +250,32 @@ export default {
   	this.getInfo()
   },
 
-  methods: {
-  		getInfo(){
+methods: {
+		getInfo(){
+			if (this.$userInfo.trabajo_id) {
   			this.getInfoSelectCarreras()
   			this.getInfoSelectLineas()
   			this.getInfoSelectAreasTematicas()
   			this.getInfoSelectEstudiantes()
-  			this.form.fill(this.$userInfo)
-  		},
-  	  getInfoSelectAreasTematicas(){
-        this.llamarAPI({tipo:'get', ruta:'api/index_areas_tematicas_formateados', variable:'areas_tematicas'})
-      },
-      getInfoSelectCarreras(){
-        this.llamarAPI({tipo:'get', ruta:'api/index_carreras_formateados', variable:'carreras'})
-      },
-      getInfoSelectEstudiantes(){
-        this.llamarAPI({tipo:'get', ruta:'api/index_estudiantes_formateados', variable:'estudiantes'})
-      },
-      getInfoSelectLineas(){
-        this.llamarAPI({tipo:'get', ruta:'api/index_lineas_formateados', variable:'lineas'})
-      },
+			}
+			this.form.fill(this.$userInfo)
+			this.getNotificaciones()
+		},
+	  getInfoSelectAreasTematicas(){
+      this.llamarAPI({tipo:'get', ruta:'api/index_areas_tematicas_formateados', variable:'areas_tematicas'})
+    },
+    getInfoSelectCarreras(){
+      this.llamarAPI({tipo:'get', ruta:'api/index_carreras_formateados', variable:'carreras'})
+    },
+    getInfoSelectEstudiantes(){
+      this.llamarAPI({tipo:'get', ruta:'api/index_estudiantes_formateados', variable:'estudiantes'})
+    },
+    getInfoSelectLineas(){
+      this.llamarAPI({tipo:'get', ruta:'api/index_lineas_formateados', variable:'lineas'})
+    },
+    getNotificaciones(){
+    	this.llamarAPI({tipo:'get', ruta:'api/get_notificaciones', variable: 'notificaciones'})
+    },
     methodName () {
       
     }

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\NotificacionesUsuario;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class NotificacionesUsuarioController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +16,12 @@ class NotificacionesUsuarioController extends Controller
      */
     public function index()
     {
-        $id = auth('api')->user()->id;
-        return NotificacionesUsuario::where('usuario_id', $id);
+        //
+    }
+
+    public function indexNotificaciones(Request $request)
+    {
+        return NotificacionesUsuario::where('id', $request->id)->get();
     }
 
     /**

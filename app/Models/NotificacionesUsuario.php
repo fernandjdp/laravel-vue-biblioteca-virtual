@@ -11,7 +11,7 @@ class NotificacionesUsuario extends Model
     use SoftDeletes;
     use HasFactory;
 
-    public $fillable = [ 'usuario_id', 'titulo' 'texto', 'tipo' ];
+    public $fillable = [ 'usuario_id', 'titulo' ,'texto', 'tipo' ];
  
     /**
      * The attributes that should be mutated to dates.

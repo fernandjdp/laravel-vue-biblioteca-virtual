@@ -19,12 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /* API */
+
 Route::apiResources(['carrera' => 'App\Http\Controllers\API\CarreraController']);
 Route::apiResources(['linea' => 'App\Http\Controllers\API\LineaController']);
 Route::apiResources(['areasTematicas' => 'App\Http\Controllers\API\AreaTematicaController']);
 Route::apiResources(['trabajo' => 'App\Http\Controllers\API\TrabajoController']);
 Route::apiResources(['users' => 'App\Http\Controllers\API\UserController']);
-Route::apiResources(['notificaciones' => 'App\Http\Controllers\API\NotificacionesUsuariosController']);
+Route::apiResources(['notificaciones' => 'App\Http\Controllers\API\NotificacionesUsuarioController']);
 
 
 
@@ -58,3 +59,6 @@ Route::get('index_lineas_formateados', [App\Http\Controllers\API\LineaController
 
 //Areas Tematicas
 Route::get('index_areas_tematicas_formateados', [App\Http\Controllers\API\AreaTematicaController::class, 'formatearAreasTematicasAtlasSelect']);
+
+//Perfil
+Route::get('get_notificaciones', [App\Http\Controllers\API\NotificacionesUsuarioController::class, 'indexNotificaciones']);
