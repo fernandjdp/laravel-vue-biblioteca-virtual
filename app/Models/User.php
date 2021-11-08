@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(TipoUsuario::class,'tipo_usuario_id');
     }
+
+    public function notificaciones()
+    {
+        return $this->hasMany(NotificacionesUsuario::class, 'usuario_id');
+    }
 }
