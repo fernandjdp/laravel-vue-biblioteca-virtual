@@ -24,6 +24,7 @@ Route::apiResources(['linea' => 'App\Http\Controllers\API\LineaController']);
 Route::apiResources(['areasTematicas' => 'App\Http\Controllers\API\AreaTematicaController']);
 Route::apiResources(['trabajo' => 'App\Http\Controllers\API\TrabajoController']);
 Route::apiResources(['users' => 'App\Http\Controllers\API\UserController']);
+Route::apiResources(['notificaciones' => 'App\Http\Controllers\API\NotificacionesUsuariosController']);
 
 
 
