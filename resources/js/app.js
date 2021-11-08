@@ -96,7 +96,7 @@ Vue.use(VueRouter);
 
 /* Información del usuario logueado */
 
-Vue.prototype.$userInfo = document.querySelector("meta[name='user_info']").getAttribute('content');
+Vue.prototype.$userInfo = JSON.parse(document.querySelector("meta[name='user_info']").content);
 Vue.prototype.$userType = document.querySelector("meta[name='user_type']").getAttribute('content');
 
 /* LlamarAPI */
