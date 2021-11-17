@@ -37,6 +37,7 @@ class CreateTrabajosTable extends Migration
             $table->string('ruta_trabajo_pdf');
             //$table->json('autores_id'); //Array de users_id Ej. 1, 2, 43, 102
             $table->boolean('aprobado')->default(0);
+            $table->boolean('rechazado')->default(0);
             $table->timestamps();
         });
     }
