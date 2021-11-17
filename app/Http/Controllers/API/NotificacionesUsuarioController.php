@@ -19,9 +19,9 @@ class NotificacionesUsuarioController extends Controller
         //
     }
 
-    public function indexNotificaciones(Request $request)
+    public function indexNotificaciones($id)
     {
-        return NotificacionesUsuario::where('id', $request->id)->get();
+        return NotificacionesUsuario::where('usuario_id', $id)->get();
     }
 
     /**

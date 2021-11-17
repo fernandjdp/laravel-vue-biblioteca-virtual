@@ -11,16 +11,6 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     *
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-    */
 
     /**
      * Display a listing of the resource.
@@ -35,6 +25,15 @@ class UserController extends Controller
         $paginas_totales = ceil($total / $cantidad_por_pagina);
 
         return [$info, $paginas_totales];
+    }
+
+    /**
+     * Muestra la informacion del estudiante junto con sus notificaciones y trabajo registrado
+     * @return [json] [Informacion del estudiante]
+     */
+    public function getEstudiante($id)
+    {   
+        return User::with('notificaciones', 'trabajo')->find($id);
     }
 
     /**

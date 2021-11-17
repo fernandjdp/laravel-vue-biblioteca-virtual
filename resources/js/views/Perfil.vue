@@ -12,30 +12,30 @@
 								<div class="row">
 		              <div class="col-6">
 		                <va-form ref="form" type="vertical">
-		                  <va-form-item label="Nombre" need>
+		                  <va-form-item label="Nombre">
 		                    <va-input
 		                      name="Nombre"
 		                      disabled
-		                      v-model="info_trabajo.nombre"
+		                      v-model="info_usuario.trabajo.nombre"
 		                      placeholder="Nombre del trabajo de grado"
 		                      :rules="[{type:'required', tip:'Este campo es necesario'}]"
 		                      clearable />
 		                  </va-form-item>
-		                  <va-form-item label="Alias" need>
+		                  <va-form-item label="Alias">
 		                    <va-input
 		                      name="Alias"
 		                      disabled
-		                      v-model="info_trabajo.alias"
+		                      v-model="info_usuario.trabajo.alias"
 		                      placeholder="Alias que aparecerá como título en la biblioteca"
 		                      :rules="[{type:'required', tip:'Este campo es necesario'}]"
 		                      clearable />
 		                  </va-form-item>
-		                  <va-form-item label="Carrera" need>
+		                  <va-form-item label="Carrera">
 		                    <va-select
 		                      search
 		                      disabled
 		                      name="Carrera"
-		                      v-model="info_trabajo.carrera_id"
+		                      v-model="info_usuario.trabajo.carrera_id"
 		                      :options="carreras"
 		                      :rules="[{type:'required'}]">
 		                    </va-select>
@@ -44,10 +44,10 @@
 		              </div>
 		              <div class="col-6">
 		                <va-form ref="form" type="vertical">
-		                <va-form-item label="Descripcion" need>
+		                <va-form-item label="Descripcion">
 		                  <va-textarea
 		                  disabled 
-		                  v-model="info_trabajo.descripcion"
+		                  v-model="info_usuario.trabajo.descripcion"
 		                  :resize="true"
 		                  minHeight="180px">
 		                  </va-textarea>
@@ -56,22 +56,22 @@
 		              </div>
 		              <div class="col-12">
 		                <va-form ref="form" type="vertical">
-		                  <va-form-item label="Linea de Investigacion" need>
+		                  <va-form-item label="Linea de Investigacion">
 		                      <va-select
 		                        search
 		                      disabled
 		                        name="Linea"
-		                        v-model="info_trabajo.linea_id"
+		                        v-model="info_usuario.trabajo.linea_id"
 		                        :options="lineas"
 		                        :rules="[{type:'required'}]">
 		                      </va-select>
 		                    </va-form-item>
-		                    <va-form-item label="Área Temática" need>
+		                    <va-form-item label="Área Temática">
 		                      <va-select
 		                        search
 		                      disabled
 		                        name="AreaTematica"
-		                        v-model="info_trabajo.areaTematica_id"
+		                        v-model="info_usuario.trabajo.areaTematica_id"
 		                        :options="areas_tematicas"
 		                        :rules="[{type:'required'}]">
 		                      </va-select>
@@ -91,35 +91,33 @@
 						  </div>
 							
 						</div>
+
 					</div>
 
 					<div class="card border-light shadow rounded-card mb-3">
 						<div class="card-body">
 							<h3>Notificaciones</h3>
-							<div class="add-scroll">
-								<div class="bd-callout bd-callout-primary">
-							      <h4>Primary Callout</h4>
-							      This is a primary callout.
-							    </div>
-							    <div class="bd-callout bd-callout-success">
-							      <h4>Primary Callout</h4>
-							      This is a primary callout.
-							    </div>
-							    <div class="bd-callout bd-callout-info">
-							      <h4>Primary Callout</h4>
-							      This is a primary callout.
-							    </div>
-							    <div class="bd-callout bd-callout-danger">
-							      <h4>Primary Callout</h4>
-							      This is a primary callout.
-							    </div>
-							    <div class="bd-callout bd-callout-warning">
-							      <h4>Primary Callout</h4>
-							      This is a primary callout.
-							    </div>
-							</div>
+								<div v-if="info_usuario.notificaciones.length > 0">
+										<div class="add-scroll">
+										<div v-for="notif in info_usuario.notificaciones">
+											<div :class="'bd-callout bd-callout-'+notif.tipo">
+									    	<h4 :class="'text-'+notif.tipo">{{notif.titulo}}</h4>
+									    	{{notif.texto}}
+									  	</div>					
+										</div>
+									</div>									
+								</div>
+								<div v-else>
+									<vs-alert relief color="rgb(211,211,211)">
+							    <template #title>
+							      Bandeja limpia
+							    </template>
+							    Actualmente no tienes notificaciones
+							  </vs-alert>
+								</div>
 						</div>
 					</div>
+
 				</div>
 				<div class="col-4">
 					<div class="card border-light shadow rounded-card">
@@ -197,7 +195,10 @@
 		                    placeholder=""
 		                    />
 	                	</va-form-item>
-	                </va-form>					
+	                </va-form>
+	                <vs-button @click="actualizarPerfil" blank primary block>
+                    <h4 class="text-white">Actualizar perfil</h4>
+                  </vs-button>					
 							</div>
 						</div>
 					</div>
@@ -219,15 +220,7 @@ export default {
       carreras:[],
       estudiantes:[],
       lineas:[],
-      notificaciones:[],
-    	info_trabajo: new Form({
-    		nombre:'',
-    		alias:'',
-    		carrera_id:'',
-    		descripcion:'',
-    		linea_id:'',
-    		areaTematica_id:'',
-    	}),
+      info_usuario:[],
     	form: new Form({
 	      id:undefined,
         name:'',
@@ -259,7 +252,7 @@ methods: {
   			this.getInfoSelectEstudiantes()
 			}
 			this.form.fill(this.$userInfo)
-			this.getNotificaciones()
+			this.getUserInfo()
 		},
 	  getInfoSelectAreasTematicas(){
       this.llamarAPI({tipo:'get', ruta:'api/index_areas_tematicas_formateados', variable:'areas_tematicas'})
@@ -273,11 +266,11 @@ methods: {
     getInfoSelectLineas(){
       this.llamarAPI({tipo:'get', ruta:'api/index_lineas_formateados', variable:'lineas'})
     },
-    getNotificaciones(){
-    	this.llamarAPI({tipo:'get', ruta:'api/get_notificaciones', variable: 'notificaciones'})
+    getUserInfo(){
+    	this.llamarAPI({tipo:'get', ruta:'api/get_estudiante/'+this.$userInfo.id, variable:'info_usuario'})
     },
-    methodName () {
-      
+    actualizarPerfil () {
+      this.llamarAPI({tipo:'put', ruta:'api/users/', id:this.form.id})
     }
   }
 }
