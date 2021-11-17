@@ -20,13 +20,13 @@
                         <vs-table>
                          <template #thead>
                           <vs-tr>
-                            <vs-th style="width: 5%">
+                            <vs-th style="width: 2%">
                               ID
                             </vs-th>
                             <vs-th style="width: 35%">
                               Nombre
                             </vs-th>
-                            <vs-th style="width: 20%">
+                            <vs-th style="width: 15%">
                               Alias
                             </vs-th>
                             <vs-th style="width: 10%">
