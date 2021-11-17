@@ -64,21 +64,27 @@
                             </vs-td>
                             <vs-td>
                               <va-lozenge v-show="tr.aprobado" type="success">Aprobado</va-lozenge>
-                              <va-lozenge v-show="!tr.aprobado" type="help">En espera</va-lozenge>
+                              <va-lozenge v-if="!tr.aprobado && tr.rechazado" type="danger">Rechazado</va-lozenge>
+                              <va-lozenge v-show="!tr.aprobado && !tr.rechazado" type="help">En espera</va-lozenge>
                             </vs-td>
                             <template #expand>
                               <div class="con-content">       
                                 <vs-row align="flex-end" justify="flex-end">  
-                                  <vs-col offset="9" w="1">
+                                  <vs-col offset="8" w="1">
                                     <vs-button @click="modalEdicion(tr)" flat icon>
                                       Editar
                                     </vs-button>
                                     </vs-col>
                                     <vs-col v-if="!tr.aprobado" w="1">
-                                    <vs-button @click="deleteTrabajo(tr.id)" border danger>
+                                    <vs-button @click="deleteTrabajo(tr.id)" flat danger>
                                       Eliminar
                                     </vs-button>
-                                  </vs-col>  
+                                  </vs-col>
+                                  <vs-col v-if="!tr.aprobado" w="1">
+                                    <vs-button @click="rechazarTrabajo(tr.id)" border danger>
+                                      Rechazar
+                                    </vs-button>
+                                  </vs-col>   
                                   <vs-col v-if="!tr.aprobado" w="1">
                                     <vs-button @click="aprobarTrabajo(tr.id)" border success>
                                       Aprobar
@@ -287,6 +293,9 @@
       },
       aprobarTrabajo(id){
         this.llamarAPI({tipo:'put', ruta:'api/aprobar/', id:id})
+      },
+      rechazarTrabajo(id){
+        this.llamarAPI({tipo:'put', ruta:'api/rechazar/', id:id})
       },
       updateTrabajo(id){
         this.llamarAPI({tipo:'put', ruta:'api/trabajo/', id:id})

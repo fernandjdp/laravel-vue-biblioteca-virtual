@@ -44,6 +44,7 @@ Route::get('trabajo_by_carrera/{carrera}', [App\Http\Controllers\API\TrabajoCont
 Route::get('trabajo_by_rama/{carrera_id}/{rama_id}', [App\Http\Controllers\API\TrabajoController::class, 'indexPorRama']);
 Route::get('trabajos-paginados', [App\Http\Controllers\API\TrabajoController::class, 'indexList']);
 Route::put('aprobar/{id}', [App\Http\Controllers\API\TrabajoController::class, 'aprobar']);
+Route::put('rechazar/{id}', [App\Http\Controllers\API\TrabajoController::class, 'rechazar']);
 
 //Carreras
 Route::get('carreras-paginadas', [App\Http\Controllers\API\CarreraController::class, 'indexList']);
@@ -52,6 +53,7 @@ Route::get('index_carreras_formateados', [App\Http\Controllers\API\CarreraContro
 // Usuarios 
 Route::get('index_estudiantes', [App\Http\Controllers\API\UserController::class, 'getEstudiantes']);
 Route::get('index_estudiantes_formateados', [App\Http\Controllers\API\UserController::class, 'formatearEstudiantesAtlasSelect']);
+Route::get('get_estudiante/{id}', [App\Http\Controllers\API\UserController::class, 'getEstudiante']);
 
 // Lineas
 Route::get('lineas-paginadas', [App\Http\Controllers\API\LineaController::class, 'indexList']);
@@ -61,4 +63,4 @@ Route::get('index_lineas_formateados', [App\Http\Controllers\API\LineaController
 Route::get('index_areas_tematicas_formateados', [App\Http\Controllers\API\AreaTematicaController::class, 'formatearAreasTematicasAtlasSelect']);
 
 //Perfil
-Route::get('get_notificaciones', [App\Http\Controllers\API\NotificacionesUsuarioController::class, 'indexNotificaciones']);
+Route::get('get_notificaciones/{id}', [App\Http\Controllers\API\NotificacionesUsuarioController::class, 'indexNotificaciones']);

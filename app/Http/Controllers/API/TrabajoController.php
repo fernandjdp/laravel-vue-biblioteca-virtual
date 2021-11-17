@@ -4,12 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Trabajo;
 use App\Models\User;
+use App\Http\Traits\NotificacionTrait;
 use App\Models\autoresTrabajo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File; 
 
 class TrabajoController extends Controller
 {
+    use NotificacionTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -154,6 +158,9 @@ class TrabajoController extends Controller
             $usuario = User::find($id);
             $usuario->trabajo_id = $trabajo_id;
             $usuario->save();
+
+            $this->crearNotificacion($id, 'trabajo_registrado');
+
         }
         
 
@@ -194,9 +201,74 @@ class TrabajoController extends Controller
     }
 
     public function aprobar($id){
-        $Trabajo = Trabajo::findOrFail($id);
-        $Trabajo->aprobado = 1;
-        $Trabajo->save();
+        $trabajo = Trabajo::with('autores')->findOrFail($id);
+        $trabajo->aprobado = 1;
+        $trabajo->save();
+        foreach ($trabajo->autores as $info) {
+            $this->crearNotificacion($info->id, 'trabajo_aprobado');
+        }
+
+        return ['message' => 'informacion aprobada'];
+
+    }
+
+    /**
+     * Rechaza el trabajo de grado cambiado el estatus del mismo, eliminando los registros y notificando a los usuarios
+     * @param  [int] $id [description]
+     * @return [string]     [Mensaje de confirmacion]
+     */
+    public function rechazar($id){
+        $trabajo = Trabajo::with('autores')->findOrFail($id);
+
+        $trabajo->rechazado = 1;
+        $trabajo->save();
+
+        $this->eliminarTrabajos($trabajo);
+
+        $this->rechazarTrabajoUsuarios($trabajo);
+
+        return ['message' => 'informacion aprobada'];
+
+    }
+
+    /**
+     * Elimina los registros de trabajo_id en cada usuario y se le notifica el rechazo
+     * @param  [Collection] $trabajo [Colleccion del trabajo correspondiente]
+     * @return [type]          [description]
+     */
+    private function rechazarTrabajoUsuarios($trabajo)
+    {
+        foreach ($trabajo->autores as $info) {
+            
+            //Eliminar el registro
+            $usuario = User::find($info->id);
+            $usuario->trabajo_id = null;
+            $usuario->save();
+
+            //Notificacion
+            $this->crearNotificacion($info->id, 'trabajo_rechazado');
+        }
+
+        return true;
+    }
+
+    /**
+     * Elimina los archivos de trabajo de grado y su respectivo resumen
+     * @param  [Collection] $trabajo [Colleccion del trabajo correspondiente]
+     * @return [type]          [description]
+     */
+    private function eliminarTrabajos($trabajo){
+        /**
+         * Elimina los archivos del trabajo de grado y su resumen
+         */
+        if (File::exists(public_path($trabajo->ruta_resumen_pdf)) && File::exists(public_path($trabajo->ruta_trabajo_pdf))) {
+            File::delete(public_path($trabajo->ruta_resumen_pdf));
+            File::delete(public_path($trabajo->ruta_trabajo_pdf));
+        }
+        else {
+            return ['message' => 'Error, los archivos no existen'];
+        }
+        return true;
     }
 
     /**
