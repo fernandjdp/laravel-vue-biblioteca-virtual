@@ -5,7 +5,7 @@
 				<div class="col-8">
 
 					<!-- Card descripcion del trabajo -->
-					<div class="card border-light shadow rounded-card mb-3">
+					<div v-if="this.$userInfo.tipo_usuario_id == 1" class="card border-light shadow rounded-card mb-3">
 						<div class="card-body">
 							<h3>Trabajo de grado</h3>
 							<div v-if="this.$userInfo.trabajo_id">
