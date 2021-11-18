@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 
 class UserController extends Controller
@@ -128,6 +129,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
+        dd($request);
+
         $user = User::findOrFail($id);
 
         $this->validate($request,[
@@ -186,5 +189,40 @@ class UserController extends Controller
 
         return $users;
 
+    }
+
+    public function imagenPerfil(Request $request)
+    {
+        if ($request->foto) {
+            $usuario = User::find($request->id);
+            $ruta_imagen = $this->crearRuta($request->foto);
+        }
+        $usuario->ruta_imagen = $ruta_imagen;
+        $usuario->save();
+
+        return true;
+    }
+
+    private function crearRuta($item)
+    {
+        $nombre_archivo = date('dmy-m').'_'.$item->getClientOriginalName();
+
+        if ($item->getClientMimeType() == "image/jpeg") { //Si es una imagen
+            $ruta_item = '/img/' . $nombre_archivo;
+        }
+
+        //Carga el archivo
+        $this->cargarItem($item, $nombre_archivo);
+        
+        return $ruta_item;
+    }
+
+    private function cargarItem($item ,$nombre_archivo)
+    {
+        if ($item->getClientMimeType() == "image/jpeg") { //Si es una imagen
+            $item->move('img', $nombre_archivo);
+        }
+        
+        return ['message' => 'Imagen registrada exitosamente'];
     }
 }

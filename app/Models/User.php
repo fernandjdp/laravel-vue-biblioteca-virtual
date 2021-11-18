@@ -26,7 +26,8 @@ class User extends Authenticatable
         'password',
         'telefono',
         'telegram',
-        'linkedin_url'
+        'linkedin_url',
+        'ruta_imagen'
     ];
 
     /**

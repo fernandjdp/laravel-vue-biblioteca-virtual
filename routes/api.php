@@ -63,4 +63,6 @@ Route::get('index_lineas_formateados', [App\Http\Controllers\API\LineaController
 Route::get('index_areas_tematicas_formateados', [App\Http\Controllers\API\AreaTematicaController::class, 'formatearAreasTematicasAtlasSelect']);
 
 //Perfil
+Route::post('cambiar_imagen', [App\Http\Controllers\API\UserController::class, 'imagenPerfil']);
+//Notificaciones
 Route::get('get_notificaciones/{id}', [App\Http\Controllers\API\NotificacionesUsuarioController::class, 'indexNotificaciones']);

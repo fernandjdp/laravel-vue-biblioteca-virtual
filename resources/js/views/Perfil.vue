@@ -97,7 +97,7 @@
 					<div class="card border-light shadow rounded-card mb-3">
 						<div class="card-body">
 							<h3>Notificaciones</h3>
-								<div v-if="info_usuario.notificaciones.length > 0">
+								<div v-if=" info_usuario.notificaciones && info_usuario.notificaciones.length > 0">
 										<div class="add-scroll">
 										<div v-for="notif in info_usuario.notificaciones">
 											<div :class="'bd-callout bd-callout-'+notif.tipo">
@@ -127,9 +127,9 @@
 								<h6 class="card-title text-uppercase text-muted mb-0 text-centered">
 						            Carrera
 						          </h6>
-								<vs-avatar size="200" circle>
-								 	<div v-if="false">
-								 	 	<!-- Aqui la variable de imagen -->
+								<vs-avatar @click="clickSeleccionarImagen" size="200" circle pointer>
+								 	<div v-if="form.ruta_imagen">
+								 	 	<img :src="info_usuario.ruta_imagen" alt="">
 								 	</div>
 								 	<div v-else>
 							        	<img src="/images/vendor/placeholders/Profile_avatar_placeholder_large.png" alt="">								 	 	
@@ -203,6 +203,18 @@
 						</div>
 					</div>
 				</div>
+				<!-- INPUT DE IMAGEN-->
+		    <div>
+		    <!-- Ruta de la imagen -->
+		      <input
+		        id="file-input"
+		        ref="cargarImagen"
+		        class="d-none"
+		        type="file"
+		        accept=".jpg, .jpeg, .png"
+		        @change="agregarImagen"
+		        >
+		    </div>
 			</div>
 		</div>
 	</div>
@@ -221,6 +233,7 @@ export default {
       estudiantes:[],
       lineas:[],
       info_usuario:[],
+      foto:null,
     	form: new Form({
 	      id:undefined,
         name:'',
@@ -232,6 +245,7 @@ export default {
         email:'',
         telegram:'',
         linkedin_url:'',
+        ruta_imagen:'',	
         password:'',
         password_confirmation:'',
         confirmacion_terminos_condiciones:false,
@@ -241,6 +255,13 @@ export default {
 
   mounted(){
   	this.getInfo()
+  },
+
+  created(){
+  	Fire.$on('recargar',() => {
+          this.form.reset()
+          this.getInfo()
+      });
   },
 
 methods: {
@@ -269,9 +290,34 @@ methods: {
     getUserInfo(){
     	this.llamarAPI({tipo:'get', ruta:'api/get_estudiante/'+this.$userInfo.id, variable:'info_usuario'})
     },
-    actualizarPerfil () {
+    actualizarPerfil (){
       this.llamarAPI({tipo:'put', ruta:'api/users/', id:this.form.id})
-    }
+    },
+    clickSeleccionarImagen(){
+    	this.$refs.cargarImagen.click()
+    },
+    agregarImagen(e){
+    	this.foto = e.target.files[0];
+    	const data = new FormData();
+    	data.append('foto', this.foto);
+    	data.append('id' , this.form.id)
+    	axios.post('api/cambiar_imagen', data)
+    	.then(()=>{
+      	this.$swal(
+          'Listo',
+          'La informacion ha sido creada exitosamente',
+          'success'
+      )
+        Fire.$emit('recargar');
+      })
+      .catch(()=>{
+      	this.$swal(
+          'Error!',
+          'No se pudo realizar esta accion',
+          'error'
+    	)
+      });
+    },
   }
 }
 </script>

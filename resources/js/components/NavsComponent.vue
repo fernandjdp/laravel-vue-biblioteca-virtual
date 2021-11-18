@@ -31,6 +31,9 @@
       <!-- NAVBAR LATERAL (SIDEBAR) -->
       <vs-sidebar
         absolute
+        background="primary"
+        textWhite
+        square
         reduce
         v-model="active"
         open
