@@ -167,9 +167,6 @@
         </vs-sidebar-item>
         <template #footer>
           <vs-row justify="space-between">
-            <vs-avatar>
-              <!-- -->
-            </vs-avatar>
             <vs-button
               icon
               color="danger"
