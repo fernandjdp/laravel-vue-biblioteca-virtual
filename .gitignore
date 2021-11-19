@@ -5,6 +5,7 @@
 /storage/*.key
 /public/resumenes/*
 /public/trabajos_especiales/*
+/public/img/*
 /vendor
 .env
 .env.backup
