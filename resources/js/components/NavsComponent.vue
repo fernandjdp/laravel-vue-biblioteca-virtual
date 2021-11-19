@@ -140,12 +140,13 @@
             </template>
             Áreas Temáticas
           </vs-sidebar-item>
-          <vs-sidebar-item to="/auditoria" id="auditoria">
+          <!-- A IMPLEMENTAR  -->
+          <!--<vs-sidebar-item to="/auditoria" id="auditoria">
             <template #icon>
               <font-awesome-icon icon="shoe-prints" />
             </template>
             Auditoría
-          </vs-sidebar-item>
+          </vs-sidebar-item>-->
           <vs-sidebar-item to="/revision" id="revision">
             <template #icon>
               <font-awesome-icon icon="user-shield" />
@@ -153,12 +154,13 @@
             Revisión
           </vs-sidebar-item>
         </vs-sidebar-group>
-        <vs-sidebar-item to="/docente" id="docente">
+        <!-- A IMPLEMENTAR  -->
+        <!--<vs-sidebar-item to="/docente" id="docente">
           <template #icon>
             <font-awesome-icon icon="user-tie" />
           </template>
           Docente
-        </vs-sidebar-item>
+        </vs-sidebar-item>-->
         <vs-sidebar-item v-show="this.$userType >= 3" to="/iconos" id="iconos">
           <template #icon>
             <font-awesome-icon icon="icons" />
