@@ -1,5 +1,12 @@
 <template>
-    <div class="col-2">
+    <div class="col-2 d-grid">
+      <button type="button" class="d-flex btn btn-primary bg-gradient border-light shadow rounded-pill justify-content-around align-items-center">
+        <font-awesome-icon icon="plus" size="3x" />
+        <h3 class="text-white">
+          Nuevo Trabajo
+        </h3>
+      </button>
+      <!--
       <a href="#" class="btn btn-dark text-white">
         <router-link to="/nuevo-trabajo" class="nav-link text-center">
           <span class="d-flex align-items-center">
@@ -9,7 +16,7 @@
               </span> 
           </span>
         </router-link>
-      </a>
+      </a>-->
     </div>
 </template>
 
