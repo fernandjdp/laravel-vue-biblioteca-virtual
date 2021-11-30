@@ -24,10 +24,14 @@ class TrabajoController extends Controller
         return Trabajo::with('linea', 'autores')->get();
     }
 
-    public function indexList()
+    public function indexList($lista_trabajos)
     {
+        $todos_trabajos = Trabajo::with('linea', 'carrera', 'autores')->latest();
         $cantidad_por_pagina = 5;
-        $info = Trabajo::with('linea', 'carrera', 'autores')->latest()->paginate($cantidad_por_pagina);
+
+        $info = ($lista_trabajos ? $lista_trabajos : $todos_trabajos);
+        $info = $info->paginate($cantidad_por_pagina);
+
         $total = Trabajo::all()->count();
         $paginas_totales = ceil($total / $cantidad_por_pagina);
 
@@ -282,5 +286,15 @@ class TrabajoController extends Controller
         $Trabajo = Trabajo::findOrFail($id);
         $Trabajo->delete();
         return ['message' => 'User Deleted'];
+    }
+
+    /**
+     * Busca entre la lista de trabajos y pagina basado en los resultados
+     * @param  Request $request Form traído desde el componente de Filtro
+     * @return JSON           Data paginada basada en la busqueda
+     */
+    public function buscarTrabajo(Request $request)
+    {
+        dd($request);
     }
 }
