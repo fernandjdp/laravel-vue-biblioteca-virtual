@@ -23,7 +23,7 @@
 					      <img :src="trabajo.ruta_img"  height="200px" alt="Imagen">
 					    </template>-->
 					    <template #img>
-					      <img src="/img/IsometricLogo.jpeg"  height="200px" alt="Imagen">
+					      <img src="/img/Dream_TradingCard.jpg"  height="200px" alt="Imagen">
 					    </template>
 					    <template #text>
 					      <b>
