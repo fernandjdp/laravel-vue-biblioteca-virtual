@@ -24,7 +24,7 @@ class TrabajoController extends Controller
         return Trabajo::with('linea', 'autores')->get();
     }
 
-    public function indexList($lista_trabajos)
+    public function indexList($lista_trabajos=null)
     {
         $todos_trabajos = Trabajo::with('linea', 'carrera', 'autores')->latest();
         $cantidad_por_pagina = 5;
@@ -295,6 +295,20 @@ class TrabajoController extends Controller
      */
     public function buscarTrabajo(Request $request)
     {
-        dd($request);
+        $busqueda = Trabajo::with('linea', 'carrera', 'autores');
+
+        if ($request->nombre != null) {
+            
+        }
+        if ($request->linea_id != null) {
+            
+        }
+        if ($request->area_tematica_id != null) {
+            
+        }
+        if ($request->desde != null) {
+            
+        }
+
     }
 }

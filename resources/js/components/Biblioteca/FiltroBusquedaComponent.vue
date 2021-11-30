@@ -1,6 +1,7 @@
 <template>
     <div class="col-10">
 		<div class="card border-light shadow rounded-card">
+
         <div class="card-header">
              <vs-row justify="flex-end">
               <vs-col w=3>
@@ -10,15 +11,34 @@
                 <vs-button
                  icon
                  color="rgb(22,212,149)"
-                 :active="active == 0"
-                 @click=""
+                 @click="search"
                 >
-                <font-awesome-icon icon="plus" />
+                <font-awesome-icon icon="search" />
               </vs-button>
               </vs-col>
             </vs-row>
         </div>
+
         <div class="card-body">
+            <va-form ref="form" type="inline" class="justify-content-between">
+                <va-form-item label="Nombre">
+                    <va-input v-model="form.nombre" autofocus />
+                </va-form-item>
+                <va-form-item label="Linea de Investigacion">
+                    <va-select v-model="form.linea_id" search width="md">
+                    </va-select>
+                </va-form-item>
+                <va-form-item label="Area de Investigacion">
+                    <va-select v-model="form.area_tematica_id" search width="md">
+                    </va-select>
+                </va-form-item>
+                <va-form-item label="Desde">
+                    <va-datepicker v-model="form.desde" :autoclose="true" format="dd-MM-yyyy" />
+                </va-form-item>
+                <va-form-item label="Hasta">
+                    <va-datepicker v-model="form.hasta" :autoclose="true" format="dd-MM-yyyy" />
+                </va-form-item>
+            </va-form> 
         </div>
          </div>
      </div>
@@ -29,20 +49,20 @@
 	{
 		data () {
 		    return {
-          active: 0,
-		      elevation: 3,
-		      padding: 10
+                form: new Form({
+                    area_tematica_id:'',
+                    desde:'',
+                    hasta:'',
+                    linea_id:'',
+                    nombre:'',
+                }),
 		    }
-		},
-		props: {
-			prop1: {
-				type: String,
-				required: false
-			},
 		},
 
 		methods: {
-      //
-    }
+            search(){
+                this.llamarAPI({tipo:'post', ruta:'api/buscarTrabajo'})
+            }
+        }
 	}
 </script>

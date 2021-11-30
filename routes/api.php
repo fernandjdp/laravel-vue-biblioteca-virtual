@@ -45,6 +45,7 @@ Route::get('trabajo_by_rama/{carrera_id}/{rama_id}', [App\Http\Controllers\API\T
 Route::get('trabajos-paginados', [App\Http\Controllers\API\TrabajoController::class, 'indexList']);
 Route::put('aprobar/{id}', [App\Http\Controllers\API\TrabajoController::class, 'aprobar']);
 Route::put('rechazar/{id}', [App\Http\Controllers\API\TrabajoController::class, 'rechazar']);
+Route::post('buscarTrabajo', [App\Http\Controllers\API\TrabajoController::class, 'buscarTrabajo']);
 
 //Carreras
 Route::get('carreras-paginadas', [App\Http\Controllers\API\CarreraController::class, 'indexList']);
