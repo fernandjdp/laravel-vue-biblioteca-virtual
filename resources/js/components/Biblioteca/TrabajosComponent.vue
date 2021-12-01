@@ -43,11 +43,16 @@
 				<p>Parece que actualmente no existe ningún trabajo de grado registrado</p>
 			</vs-alert>
 		</div>
-		<div v-if="trabajo" class="modal fade" id="detallesTrabajo" tabindex="-1" role="dialog" aria-labelledby="agregarLabel" aria-hidden="true">
-        	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                <dialog-detalles-trabajo :trabajo="trabajo"></dialog-detalles-trabajo>
-            </div>
-        </div>
+		<!-- Modal -->
+		<div class="modal fade" id="detallesTrabajo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div  class="modal-dialog  modal-dialog-centered modal-xl">
+		    <div v-if="trabajo" class="modal-content">
+		        <dialog-detalles-trabajo :trabajo="trabajo"></dialog-detalles-trabajo>
+		      <div class="modal-footer">
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<!--<div v-if="dialog">
     		<dialog-detalles-trabajo :carrera_id="carrera_id" :trabajo="trabajo" :flag="!active"></dialog-detalles-trabajo>
     	</div>-->
@@ -87,7 +92,8 @@
 	    methods: {
 	      	detallesTrabajo(trabajo){
 	    		this.trabajo = trabajo;
-	      		$('#detallesTrabajo').modal('show');
+	    		const detallesTrabajoModal = new bootstrap.Modal(document.getElementById('detallesTrabajo'))
+	      		detallesTrabajoModal.show()
 	      	},	
 	      	getTrabajos(){
 	      		//this.llamarAPI({tipo:'get', ruta:'api/trabajo_by_carrera/'+this.$store.state.route.params.carrera_id, variable:'trabajos_carrera'})
