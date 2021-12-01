@@ -29,6 +29,7 @@
         "@fortawesome/free-brands-svg-icons": "^5.15.4",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "@fortawesome/vue-fontawesome": "^2.0.6",
+        "@popperjs/core": "^2.11.0",
         "pdfobject": "^2.2.7",
         "vform": "^2.1.1",
         "vue-atlas": "^2.1.8",
