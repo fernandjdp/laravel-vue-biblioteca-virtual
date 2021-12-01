@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->index('trabajo_id');
             $table->foreign('trabajo_id')->references('id')->on('trabajos')->onDelete('cascade');
 
-            $table->string('ruta_img');
+            $table->string('ruta_imagen')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
