@@ -48,6 +48,18 @@
                 <dialog-detalles-trabajo :trabajo="trabajo"></dialog-detalles-trabajo>
             </div>
         </div>
+        <!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div  class="modal-dialog  modal-dialog-centered modal-xl">
+		    <div v-if="trabajo" class="modal-content">
+		        <dialog-detalles-trabajo :trabajo="trabajo"></dialog-detalles-trabajo>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		<!--<div v-if="dialog">
     		<dialog-detalles-trabajo :carrera_id="carrera_id" :trabajo="trabajo" :flag="!active"></dialog-detalles-trabajo>
     	</div>-->
@@ -86,8 +98,10 @@
 	    },
 	    methods: {
 	      	detallesTrabajo(trabajo){
+
 	    		this.trabajo = trabajo;
-	      		$('#detallesTrabajo').modal('show');
+	      		let myModal = new bootstrap.Modal(document.getElementById('exampleModal'))
+	      		myModal.show()
 	      	},	
 	      	getTrabajos(){
 	      		//this.llamarAPI({tipo:'get', ruta:'api/trabajo_by_carrera/'+this.$store.state.route.params.carrera_id, variable:'trabajos_carrera'})

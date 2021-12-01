@@ -1,8 +1,6 @@
 <template>
   <div class="container-fluid">
 
-    <info></info>
-
     <div class="row justify-content-center px-5 mx-1">
       <filtro-busqueda :carrera_id="$store.state.route.params.carrera_id"></filtro-busqueda>
       <boton-nuevo-trabajo></boton-nuevo-trabajo>   

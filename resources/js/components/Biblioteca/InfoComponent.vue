@@ -11,7 +11,7 @@
 				    </template>
 				    <template #text>
 				      <h6>
-				        Puedes obtener un extracto bibliográfico del trabajo de grado con un solo click
+				        Puedes obtener un extracto bibliográfico del proyecto con un solo click
 				      </h6>
 				      Presiona aqui para más informacion
 				    </template>
@@ -27,7 +27,7 @@
 				    </template>
 				    <template #text>
 				      <h6>
-				        Puedes obtener un extracto bibliográfico del trabajo de grado con un solo click
+				        Puedes obtener un extracto bibliográfico del proyecto con un solo click
 				      </h6>
 				      Presiona aqui para más informacion
 				    </template>
@@ -43,7 +43,7 @@
 				    </template>
 				    <template #text>
 				      <h6>
-				        Puedes obtener un extracto bibliográfico del trabajo de grado con un solo click
+				        Puedes obtener un extracto bibliográfico del proyecto con un solo click
 				      </h6>
 				      Presiona aqui para más informacion
 				    </template>

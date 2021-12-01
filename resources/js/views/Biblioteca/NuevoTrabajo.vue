@@ -6,7 +6,7 @@
           <div class="card-header">
                <vs-row justify="flex-end">
                 <vs-col w=12>
-                  <h3>Nuevo trabajo especial de grado</h3>
+                  <h3>Nuevo Proyecto</h3>
                 </vs-col>
               </vs-row>
           </div>
@@ -30,7 +30,7 @@
                       :rules="[{type:'required', tip:'Este campo es necesario'}]"
                       clearable />
                   </va-form-item>
-                  <va-form-item label="Carrera" need>
+                  <va-form-item label="Gerencia" need>
                     <va-select
                       search
                       name="Carrera"
@@ -51,7 +51,7 @@
                     :rules="[{type:'required', tip:'Este campo es necesario'}]"
                     clearable />
                 </va-form-item>
-                <va-form-item label="Resumen del trabajo de grado" need>
+                <va-form-item label="Resumen de la propuesta" need>
                   <va-input
                     name="Resumen"
                     v-model="pdfResumenNombre"
@@ -61,7 +61,7 @@
                     />
                     <va-button @click="clickSeleccionarResumen" type="subtle"><va-icon type="folder-open" /></va-button>
                 </va-form-item>
-                <va-form-item label="Trabajo de grado" need>
+                <va-form-item label="Informe de la propuesta" need>
                   <va-input
                     name="Trabajo"
                     v-model="pdfTrabajoNombre"
@@ -75,7 +75,7 @@
               </div>
               <div class="col-12">
                 <va-form ref="form" type="vertical">
-                  <va-form-item label="Linea de Investigacion" need>
+                  <va-form-item label="Tipo de propuesta" need>
                       <va-select
                         search
                         name="Linea"

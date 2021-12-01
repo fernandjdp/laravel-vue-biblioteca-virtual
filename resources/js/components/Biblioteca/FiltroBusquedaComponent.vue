@@ -24,12 +24,8 @@
                 <va-form-item label="Nombre">
                     <va-input v-model="form.nombre" autofocus />
                 </va-form-item>
-                <va-form-item label="Linea de Investigacion">
+                <va-form-item label="Gerencia">
                     <va-select v-model="form.linea_id" search width="md">
-                    </va-select>
-                </va-form-item>
-                <va-form-item label="Area de Investigacion">
-                    <va-select v-model="form.area_tematica_id" search width="md">
                     </va-select>
                 </va-form-item>
                 <va-form-item label="Desde">
