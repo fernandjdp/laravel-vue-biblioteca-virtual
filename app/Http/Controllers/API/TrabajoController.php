@@ -21,12 +21,12 @@ class TrabajoController extends Controller
      */
     public function index()
     {
-        return Trabajo::with('linea', 'autores')->get();
+        return Trabajo::with('linea', 'autores', 'area_tematica')->get();
     }
 
     public function indexList($lista_trabajos=null)
     {
-        $todos_trabajos = Trabajo::with('linea', 'carrera', 'autores')->latest();
+        $todos_trabajos = Trabajo::with('linea', 'carrera', 'autores', 'area_tematica')->latest();
         $cantidad_por_pagina = 5;
 
         $info = ($lista_trabajos ? $lista_trabajos : $todos_trabajos);
@@ -45,7 +45,7 @@ class TrabajoController extends Controller
      */
     public function indexPorCarrera($carrera_id)
     {
-        return Trabajo::with('linea', 'autores')->where('carrera_id',$carrera_id)
+        return Trabajo::with('linea', 'autores', 'area_tematica')->where('carrera_id',$carrera_id)
                       ->get();
     }
 
@@ -56,7 +56,7 @@ class TrabajoController extends Controller
      */
     public function indexPorRama($carrera_id, $rama_id)
     {
-        return Trabajo::with('linea', 'autores')->where('carrera_id', $carrera_id)
+        return Trabajo::with('linea', 'autores', 'area_tematica')->where('carrera_id', $carrera_id)
                       ->where('linea_id', $rama_id)
                       ->get();
     }
@@ -295,20 +295,30 @@ class TrabajoController extends Controller
      */
     public function buscarTrabajo(Request $request)
     {
-        $busqueda = Trabajo::with('linea', 'carrera', 'autores');
+        $busqueda = Trabajo::with('linea', 'carrera', 'autores','area_tematica')->where('carrera_id',$request->carrera_id);
 
-        if ($request->nombre != null) {
-            
-        }
-        if ($request->linea_id != null) {
-            
-        }
-        if ($request->area_tematica_id != null) {
-            
-        }
-        if ($request->desde != null) {
-            
-        }
+        $busqueda->when($request->nombre, function($query) use($request){
+            $query->where('nombre', 'ilike', '%' . $request->nombre . '%')->orWhere('alias', 'ilike', '%' . $request->nombre . '%');
+        });
+
+        $busqueda->when($request->linea_id, function($query) use($request){   
+            $query->whereHas('linea', function($q) use($request){
+                $q->where('id',$request->linea_id );
+            });
+        });
+
+        $busqueda->when($request->area_tematica_id, function($query) use($request){
+            $query->whereHas('area_tematica', function($q) use($request){
+                $q->where('id',$request->area_tematica_id );
+            });
+        });
+
+        $busqueda->when($request->desde && $request->hasta, function($query) use($request){
+            $query->whereBetween('created_at', [$request->desde, $request->hasta]);
+        });
+
+
+        return $busqueda->latest()->get();
 
     }
 }

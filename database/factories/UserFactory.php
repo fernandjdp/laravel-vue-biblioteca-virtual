@@ -44,4 +44,13 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function estudiante()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'tipo_usuario_id' => 1,
+            ];
+        });
+    }
 }

@@ -50,7 +50,7 @@
                 <va-input
                   name="Linea"
                   disabled
-                  v-model="trabajo.linea.nombre"
+                  v-model="trabajo.area_tematica.nombre"
                   placeholder="Alias que aparecerá como título en la biblioteca"
                   :rules="[{type:'required', tip:'Este campo es necesario'}]"
                   clearable />

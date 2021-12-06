@@ -84,10 +84,13 @@
 	    }),
 
 	    mounted() {
+	    	this.getTrabajos()
 	    },
 
 	    created() {
-	    	this.getTrabajos()
+	    	Fire.$on('filtroBusqueda', (query) => {
+               	this.trabajos_carrera = query.data;
+            })
 	    },
 	    methods: {
 	      	detallesTrabajo(trabajo){

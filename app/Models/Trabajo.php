@@ -31,6 +31,11 @@ class Trabajo extends Model
     	return $this->belongsTo(Linea::class,'linea_id');
     }
 
+    public function area_tematica()
+    {
+        return $this->belongsTo(areaTematica::class, 'areaTematica_id');
+    }
+
     public function carrera()
     {
     	return $this->belongsTo(Carrera::class,'carrera_id');
