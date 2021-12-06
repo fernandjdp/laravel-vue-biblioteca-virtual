@@ -44,12 +44,12 @@
         <!--<template #logo>
           <h2>U</h2>
         </template>-->
-        <vs-sidebar-item to="/dashboard" id="dashboard">
+        <!--<vs-sidebar-item to="/dashboard" id="dashboard">
           <template #icon>
             <font-awesome-icon icon="home" />
           </template>
           Dashboard
-        </vs-sidebar-item>
+        </vs-sidebar-item>-->
         <vs-sidebar-item v-show="this.$userType >= 1" to="/perfil" id="perfil">
           <template #icon>
             <font-awesome-icon icon="user" />
